@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 23:41:02 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/16 23:51:40 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 07:50:48 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,6 @@ void	set_player_position(t_game *game, int i, int j, int map_start)
 	game->player.pos_x = (double)j + 0.5;
 	game->player.pos_y = (double)(i - map_start) + 0.5;
 	game->player.dir = game->map_data.map[i][j];
+	player_north_south(game, i, j);
+	player_east_west(game, i, j);
 }

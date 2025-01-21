@@ -3,14 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 23:56:34 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/16 23:57:33 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 07:50:59 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	player_north_south(t_game *game, int i, int j)
+{
+	if (game->map_data.map[i][j] == 'N')
+	{
+		game->player.dir = 'N';
+		game->player.dir_x = 0;
+		game->player.dir_y = -1;
+		game->player.plane_x = 0.66;
+		game->player.plane_y = 0;
+	}
+	else if (game->map_data.map[i][j] == 'S')
+	{
+		game->player.dir = 'S';
+		game->player.dir_x = 0;
+		game->player.dir_y = 1;
+		game->player.plane_x = -0.66;
+		game->player.plane_y = 0;
+	}
+}
+
+void	player_east_west(t_game *game, int i, int j)
+{
+	if (game->player.dir == 'W')
+	{
+		game->player.dir_x = -1;
+		game->player.dir_y = 0;
+		game->player.plane_x = 0;
+		game->player.plane_y = -0.66;
+	}
+	else if (game->player.dir == 'E')
+	{
+		game->player.dir_x = 1;
+		game->player.dir_y = 0;
+		game->player.plane_x = 0;
+		game->player.plane_y = 0.66;
+	}
+}
 
 /*
 * Frees all memory allocated for final map data

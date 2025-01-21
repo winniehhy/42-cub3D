@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/21 12:31:28 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 07:51:28 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 #define TEXTURE_SIZE 64
 
 #define MOVE_SPEED 0.05
-#define ROTATE_SPEED 0.01
+#define ROTATE_SPEED 0.02
 
 #define VERTICAL 0
 #define HORIZONTAL 1
@@ -241,6 +241,8 @@ int	is_player_char(char c);
 void free_map_data(t_game *game);
 int	is_map_line(char *line);
 int	find_map_start(char **map, int height);
+void	player_north_south(t_game *game, int i, int j);
+void	player_east_west(t_game *game, int i, int j);
 
 //map_wall.c
 int	check_surrounding_walls(char **map, int row, int col);

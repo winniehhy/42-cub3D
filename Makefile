@@ -49,7 +49,7 @@ OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
 
 # Compiler and compilation flags
 CC = gcc
-CFLAGS = -Werror -Wextra -Wall -g3 -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall #-g3 -fsanitize=address
 
 # Minilibx
 MLX_PATH = minilibx-linux/
