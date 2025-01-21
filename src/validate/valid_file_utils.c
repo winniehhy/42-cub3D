@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 05:59:45 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/16 23:56:56 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/21 12:38:19 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,45 @@ int create_temp_map(char *file_path, t_game *game)
 * Handles dimension calculation, memory allocation, and data copying
 * Returns SUCCESS if parsing succeeds, FAILURE if any step fails
 */
+// int parse_temp_map(t_game *game)
+// {
+//     if (get_map_dimensions(game) == FAILURE)
+//         return (FAILURE);
+//     if (allocate_final_map(game) == FAILURE)
+//         return (FAILURE);
+//     if (copy_map_from_temp(game) == FAILURE)
+//     {
+//         free_map_data(game);
+//         return (FAILURE);
+//     }
+//     free_temp_map(game);
+//     return (SUCCESS);
+// }
+
 int parse_temp_map(t_game *game)
 {
-    if (get_map_dimensions(game) == FAILURE)
+    int map_start;
+    
+    // Find where the actual map starts using existing function
+    map_start = find_map_start(game->temp_map, game->temp_rows);
+    if (map_start == -1)
         return (FAILURE);
+
+    // Calculate dimensions only for the actual map portion
+    if (get_map_dimensions(game, map_start) == FAILURE)
+        return (FAILURE);
+    
+    // Allocate memory for the final map
     if (allocate_final_map(game) == FAILURE)
         return (FAILURE);
-    if (copy_map_from_temp(game) == FAILURE)
+    
+    // Copy only the map portion
+    if (copy_map_from_temp(game, map_start) == FAILURE)
     {
         free_map_data(game);
         return (FAILURE);
     }
+    
     free_temp_map(game);
     return (SUCCESS);
 }
