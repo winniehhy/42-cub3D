@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/21 12:23:06 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/21 12:31:28 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,10 +279,10 @@ void free_partial_temp(t_game *game, int current_row);
 
 
 //parse_tex_color.c
-int parse_config(t_game *game, char *file_path);
-int parse_colors(t_game *game, char *file_path);
-int parse_rgb_color(char *line);
-void free_split(char **arr);
+// int parse_config(t_game *game, char *file_path);
+// int parse_colors(t_game *game, char *file_path);
+// int parse_rgb_color(char *line);
+// void free_split(char **arr);
 
 //main.c
 void 	init_all(t_game *game, char *map_file, char *texture_file);

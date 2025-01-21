@@ -37,7 +37,6 @@ SRC_FILES = main.c \
 			$(VALDIR)valid_file.c\
 			$(VALDIR)valid_file_utils.c\
 			$(VALDIR)valid_file_mem.c\
-			$(VALDIR)parse_tex_color.c\
 			$(VALDIR)valid_texture.c\
 			$(PARDIR)main_map_check.c\
 			$(PARDIR)map_check_utils.c\
