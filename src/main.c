@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/21 12:37:58 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/21 12:43:05 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void setup_hooks(t_game *game)
 int main(int ac, char **av)
 {
     t_game game;
+     if (ac != 2)
+    {
+        printf("Error: Invalid number of arguments!\n");
+        return false;
+    }
     
     init_all(&game, av[1], av[2]);
     if (go_to_check_file(av[1], &game) == FAILURE)

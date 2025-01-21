@@ -49,7 +49,7 @@ OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
 
 # Compiler and compilation flags
 CC = gcc
-#CFLAGS = -Werror -Wextra -Wall -g3 #-fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -g3 -fsanitize=address
 
 # Minilibx
 MLX_PATH = minilibx-linux/
@@ -70,7 +70,7 @@ LDFLAGS = -L $(MLX_PATH) -lmlx -L $(LIBFT_PATH) -lft -lm -lbsd -lX11 -lXext
 all: $(NAME)
 
 $(NAME): $(OBJS) $(MLX) $(LIBFT)
-	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo -e "\n\n\n$(YELLOW) -- DONE COMPILING CUB3D, LET'S BEGIN THE GAME NOW ! --$(RESET)"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
