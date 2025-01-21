@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 05:59:45 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/21 12:25:31 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/21 12:38:19 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,6 @@ int parse_temp_map(t_game *game)
     map_start = find_map_start(game->temp_map, game->temp_rows);
     if (map_start == -1)
         return (FAILURE);
-
-    //  // First parse configuration (textures and colors)
-    // if (parse_config(game, map_start) == FAILURE)
-    //     return (FAILURE);
 
     // Calculate dimensions only for the actual map portion
     if (get_map_dimensions(game, map_start) == FAILURE)

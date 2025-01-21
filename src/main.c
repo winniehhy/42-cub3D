@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/21 12:35:20 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/21 12:37:58 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int main(int ac, char **av)
 
 
 // /**
-//  * Prints debug information about a texture
+//  * -change parse_temp_map,copy_map_from_temp, get_map_dimension
 //  */
 // void print_texture_debug(t_img *texture, const char *direction)
 // {
