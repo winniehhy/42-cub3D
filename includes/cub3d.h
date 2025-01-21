@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/19 15:02:06 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/21 12:23:06 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,9 +265,9 @@ int check_rgb_colors(t_map_data *map_data);
 int validate_loaded_textures(t_game *game);
 
 //valid_file_mem.c
-int get_map_dimensions(t_game *game);
+int get_map_dimensions(t_game *game, int map_start);
 int allocate_final_map(t_game *game);
-int copy_map_from_temp(t_game *game);
+int copy_map_from_temp(t_game *game, int map_start);
 void free_partial_map(t_game *game, int current_row);
 
 //valid_file_utils.c
@@ -277,6 +277,12 @@ int parse_temp_map(t_game *game);
 void free_temp_map(t_game *game);
 void free_partial_temp(t_game *game, int current_row);
 
+
+//parse_tex_color.c
+int parse_config(t_game *game, char *file_path);
+int parse_colors(t_game *game, char *file_path);
+int parse_rgb_color(char *line);
+void free_split(char **arr);
 
 //main.c
 void 	init_all(t_game *game, char *map_file, char *texture_file);
