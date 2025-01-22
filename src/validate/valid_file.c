@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:38:20 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/20 12:09:40 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 14:27:28 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,12 @@
 
 bool valid_input(int ac, char *filepath)
 {
-    if (ac != 2)
-    {
-        printf("Error: Invalid number of arguments!\n");
-        return false;
-    }
-    
-    char *ext = strrchr(filepath, '.');
-    if (!ext || ft_strcmp(ext, ".cub") != 0)
+       if (ft_strcmp(filepath + ft_strlen(filepath) - 4, ".cub") != 0)
     {
         printf("Error: Invalid file extension! Expected .cub file.\n");
         return false;
     }
+
     printf("Debug: Input is valid\n");
     return true;
 }
@@ -55,10 +49,10 @@ int valid_texture(t_game *game, char *file_path)
         return (FALSE);
     if (!parse_directions(game, file_path))
         return (FALSE);
+    printf("Debug: Done parse direction\n");
     if (!validate_loaded_textures(game))
         return (FALSE);
-    if (!check_rgb_colors(&game->map_data))
-        return (FALSE);
+    printf("Debug: Done validate loaded textures\n");
     return (TRUE);
 }
 
@@ -72,10 +66,13 @@ int go_to_check_file(char *file_path, t_game *game)
 
     if (!valid_file(file_path, game))
         return (print_err_msg("Invalid file"), FAILURE);
-    
 
     if (!valid_texture(game, file_path))
         return (print_err_msg("Invalid texture"), FAILURE);
+    
+    printf("Debug: Entering parse_map_color\n");
+    if (parse_map_colors(file_path, game) == FAILURE)
+        return (print_err_msg("Invalid map colors"), FAILURE);
 
     return (SUCCESS);
 }
