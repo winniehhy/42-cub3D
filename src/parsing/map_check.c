@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+       */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 23:41:02 by hheng             #+#    #+#             */
 /*   Updated: 2025/01/22 07:50:48 by xquah            ###   ########.fr       */
@@ -26,7 +26,7 @@ int	check_first_last_row(char **map, int height)
 	i = 0;
 	while (map[height - 1][i])
 	{
-		if (map[height - 1][i] != '1' && map[height - 1][i] != ' ' 
+		if (map[height - 1][i] != '1' && map[height - 1][i] != ' '
 			&& map[height - 1][i] != '\n')
 			return (FAILURE);
 		i++;

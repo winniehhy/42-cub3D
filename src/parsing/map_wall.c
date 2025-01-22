@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   map_wall.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42kl.edu.my>          +#+  +:+       +#+       */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 23:50:39 by hheng             #+#    #+#             */
 /*   Updated: 2025/01/16 23:54:44 by hheng            ###   ########.fr       */

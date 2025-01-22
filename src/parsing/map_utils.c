@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 23:56:34 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 07:50:59 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:26:34 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,20 @@ void	player_east_west(t_game *game, int i, int j)
 	}
 }
 
-/*
-* Frees all memory allocated for final map data
-* Handles NULL checks and complete cleanup of map structure
-*/
-void free_map_data(t_game *game)
+void	free_map_data(t_game *game)
 {
-    int i;
+	int	i;
 
-    if (!game || !game->map_data.map)
-        return;
-    i = 0;
-    while (i < game->map_data.height)
-    {
-        free(game->map_data.map[i]);
-        i++;
-    }
-    free(game->map_data.map);
-    game->map_data.map = NULL;
+	if (!game || !game->map_data.map)
+		return ;
+	i = 0;
+	while (i < game->map_data.height)
+	{
+		free(game->map_data.map[i]);
+		i++;
+	}
+	free(game->map_data.map);
+	game->map_data.map = NULL;
 }
 
 int	is_map_line(char *line)
