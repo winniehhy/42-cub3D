@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:31:14 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/19 13:44:58 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 14:17:00 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ int init_texture(t_game *game)
         game->map_data.wall_tex[i].endian = 0;
     }
     
-    game->map_data.c_rgb = 0x8FA8C6; //ceiling blue
-    game->map_data.f_rgb = 0x949494; //floor grey
+    // game->map_data.c_rgb = create_rgb(0, 0, 0); //default black        // Black for ceiling
+    // game->map_data.f_rgb = create_rgb(50, 50, 50); //default 
 
     return (TRUE);
 }

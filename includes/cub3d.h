@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 07:51:28 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/22 14:07:23 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,10 +281,9 @@ void free_partial_temp(t_game *game, int current_row);
 
 
 //parse_tex_color.c
-// int parse_config(t_game *game, char *file_path);
-// int parse_colors(t_game *game, char *file_path);
-// int parse_rgb_color(char *line);
-// void free_split(char **arr);
+size_t create_rgb(int r, int g, int b);
+int process_map_line(char *line, t_game *game);
+int parse_map_colors(char *file_path, t_game *game);
 
 //main.c
 void 	init_all(t_game *game, char *map_file, char *texture_file);

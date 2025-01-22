@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:01:05 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/16 23:24:42 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 14:04:52 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,10 @@ int parse_directions(t_game *game, char *file_path)
 }
 
 /**
- * Validates an RGB color value to ensure all components (R, G, B) are within the range [0, 255].
+ * Validates an RGB color value
  * 
- * @param color The RGB color value.
- * @return TRUE if the color is valid; otherwise FALSE.
+ * @param color The RGB color value to validate
+ * @return TRUE if valid, FALSE otherwise
  */
 int validate_rgb(size_t color)
 {
@@ -131,17 +131,22 @@ int validate_rgb(size_t color)
 }
 
 /**
- * Checks the validity of the floor and ceiling colors in the map data.
+ * Checks the validity of floor and ceiling colors
  * 
- * @param map_data The map data structure containing RGB values.
- * @return TRUE if both colors are valid; otherwise FALSE.
+ * @param map_data The map data containing RGB values
+ * @return TRUE if valid, FALSE otherwise
  */
 int check_rgb_colors(t_map_data *map_data)
 {
-    if (map_data->f_rgb == 0 || map_data->c_rgb == 0)
-        return (FALSE);
+    printf("Debug: Checking RGB colors\n");
+    printf("Floor color: 0x%lx, Ceiling color: 0x%lx\n", 
+           map_data->f_rgb, map_data->c_rgb);
+    
     if (!validate_rgb(map_data->f_rgb) || !validate_rgb(map_data->c_rgb))
+    {
+        printf("Debug: Invalid RGB values detected\n");
         return (FALSE);
+    }
     return (TRUE);
 }
 
