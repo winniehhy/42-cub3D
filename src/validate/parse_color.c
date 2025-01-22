@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:29:52 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 14:14:08 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 15:31:42 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ static void free_array(char **arr)
  */
 size_t create_rgb(int r, int g, int b)
 {
-    size_t color = ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
-    printf("Debug create_rgb: Input R:%d G:%d B:%d -> Output: 0x%lx\n", r, g, b, color);
-    return color;
+    return ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
 }
 
 /**
@@ -63,20 +61,15 @@ static int parse_color_values(char *line, size_t *packed_color)
     if (!line || !packed_color)
         return (FAILURE);
 
-    printf("Parsing color line: '%s'\n", line);
-
     // Skip the identifier (F/C) and any whitespace
     trimmed_line = line;
     while (*trimmed_line && (*trimmed_line == 'F' || *trimmed_line == 'C' || 
            *trimmed_line == ' ' || *trimmed_line == '\t'))
         trimmed_line++;
 
-    printf("After skipping identifiers: '%s'\n", trimmed_line);
-
     colors = ft_split(trimmed_line, ',');
     if (!colors || !colors[0] || !colors[1] || !colors[2] || colors[3])
     {
-        printf("Debug: Color split failed\n");
         if (colors)
             free_array(colors);
         return (FAILURE);
@@ -98,24 +91,16 @@ static int parse_color_values(char *line, size_t *packed_color)
             memmove(colors[i], start, strlen(start) + 1);
     }
 
-    printf("Split values: '%s', '%s', '%s'\n", colors[0], colors[1], colors[2]);
-
     r = ft_atoi(colors[0]);
     g = ft_atoi(colors[1]);
     b = ft_atoi(colors[2]);
 
-    printf("Converted values: R:%d G:%d B:%d\n", r, g, b);
-
     free_array(colors);
 
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-    {
-        printf("Debug: Invalid RGB values\n");
         return (FAILURE);
-    }
 
     *packed_color = create_rgb(r, g, b);
-    printf("Final packed color: 0x%lx\n", *packed_color);
 
     return (SUCCESS);
 }
@@ -145,20 +130,12 @@ int process_map_line(char *line, t_game *game)
     {
         if (parse_color_values(line, &game->map_data.f_rgb) == FAILURE)
             return (print_err_msg("Invalid floor color format"), FAILURE);
-        printf("Debug: Floor color set to: R:%d G:%d B:%d\n", 
-            (int)(game->map_data.f_rgb >> 16) & 0xFF,
-            (int)(game->map_data.f_rgb >> 8) & 0xFF,
-            (int)(game->map_data.f_rgb & 0xFF));
     }
     // Parse ceiling color
     else if (line[0] == 'C')
     {
         if (parse_color_values(line, &game->map_data.c_rgb) == FAILURE)
             return (print_err_msg("Invalid ceiling color format"), FAILURE);
-        printf("Debug: Ceiling color set to: R:%d G:%d B:%d\n",
-            (int)(game->map_data.c_rgb >> 16) & 0xFF,
-            (int)(game->map_data.c_rgb >> 8) & 0xFF,
-            (int)(game->map_data.c_rgb & 0xFF));
     }
 
     return (SUCCESS);
@@ -181,12 +158,9 @@ int parse_map_colors(char *file_path, t_game *game)
     floor_found = 0;
     ceiling_found = 0;
     
-    printf("Debug: Attempting to open map file: %s\n", file_path);
     fd = open(file_path, O_RDONLY);
     if (fd < 0)
         return (print_err_msg("Cannot open map file"), FAILURE);
-
-    printf("Debug: Successfully opened map file\n");
 
     line = get_next_line(fd);
     while (line != NULL)
@@ -221,14 +195,6 @@ int parse_map_colors(char *file_path, t_game *game)
     // Verify that both colors were found and are valid
     if (!floor_found || !ceiling_found)
         return (print_err_msg("Missing floor or ceiling color"), FAILURE);
-
-    printf("Final colors - Floor: R:%d G:%d B:%d, Ceiling: R:%d G:%d B:%d\n",
-        (int)(game->map_data.f_rgb >> 16) & 0xFF,
-        (int)(game->map_data.f_rgb >> 8) & 0xFF,
-        (int)(game->map_data.f_rgb & 0xFF),
-        (int)(game->map_data.c_rgb >> 16) & 0xFF,
-        (int)(game->map_data.c_rgb >> 8) & 0xFF,
-        (int)(game->map_data.c_rgb & 0xFF));
 
     check_rgb_colors(&game->map_data);
     return (SUCCESS);

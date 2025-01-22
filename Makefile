@@ -79,7 +79,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 	@mkdir -p $(OBJDIR)initialize
 	@mkdir -p $(OBJDIR)raycast
 	@mkdir -p $(OBJDIR)player
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC)  $(INCLUDES) -c $< -o $@
 
 $(OBJDIR)%.o: $(INITDIR)%.c
 	@mkdir -p $(OBJDIR)
