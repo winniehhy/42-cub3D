@@ -125,10 +125,10 @@ fclean: clean
 
 re: fclean all
 
-# norm :
-# 	norminette ./includes
-# 	norminette ./libft
-# 	norminette ./src
+norm :
+	norminette ./includes
+	norminette ./libft
+	norminette ./src
 
 valgrind :
 	valgrind --leak-check=full ./cub3D

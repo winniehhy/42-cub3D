@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:23:02 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 17:54:59 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:29:45 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	free_all(t_game *game)
 {
-	//ADD free the map
-	free(game->map_data.wall_tex); // free the texture
+	free(game->map_data.wall_tex);
 }
 
 int	validate_rgb(size_t color)
@@ -52,7 +51,7 @@ int	process_line(char *line, t_game *game, int i)
 	game->temp_map[i] = ft_strdup(line);
 	if (!game->temp_map[i])
 	{
-		free_partial_temp(game, i);  // Free previously allocated memory
+		free_partial_temp(game, i);
 		return (-1);
 	}
 	return (0);
