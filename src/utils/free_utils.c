@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:43 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 16:45:35 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 17:14:31 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,4 @@ void free_array(char **arr)
         i++;
     }
     free(arr);
-}
-
-void	free_all(t_game *game)
-{
-	free(game->map_data.wall_tex);
 }

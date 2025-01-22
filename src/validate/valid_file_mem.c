@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_file_mem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:15:49 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/21 12:08:18 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 17:13:46 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,6 @@
 * Updates game->map_data.height and game->map_data.width
 * Returns SUCCESS after dimensions are set
 */
-// int get_map_dimensions(t_game *game)
-// {
-//     int i;
-//     int len;
-
-//     game->map_data.height = 0;
-//     game->map_data.width = 0;
-//     i = 0;
-//     while (game->temp_map[i])
-//     {
-//         len = ft_strlen(game->temp_map[i]);
-//         if (len > game->map_data.width)
-//             game->map_data.width = len;
-//         game->map_data.height++;
-//         i++;
-//     }
-//     return (SUCCESS);
-// }
-
 int get_map_dimensions(t_game *game, int map_start)
 {
     int i;
@@ -46,7 +27,6 @@ int get_map_dimensions(t_game *game, int map_start)
     i = map_start;
     while (game->temp_map[i])
     {
-        // Skip if line is empty or not a map line
         if (!game->temp_map[i] || !is_map_line(game->temp_map[i]))
             break;
             
@@ -57,7 +37,6 @@ int get_map_dimensions(t_game *game, int map_start)
         i++;
     }
     
-    // If no valid map lines found
     if (game->map_data.height == 0 || game->map_data.width == 0)
         return (FAILURE);
         
@@ -96,31 +75,6 @@ int allocate_final_map(t_game *game)
 * Pads shorter rows with spaces to ensure rectangular shape
 * Returns SUCCESS after copy is complete
 */
-// int copy_map_from_temp(t_game *game)
-// {
-//     int row;
-//     int col;
-//     int len;
-
-//     row = 0;
-//     while (row < game->map_data.height)
-//     {
-//         len = ft_strlen(game->temp_map[row]);
-//         col = 0;
-//         while (col < game->map_data.width)
-//         {
-//             if (col < len)
-//                 game->map_data.map[row][col] = game->temp_map[row][col];
-//             else
-//                 game->map_data.map[row][col] = ' ';
-//             col++;
-//         }
-//         game->map_data.map[row][col] = '\0';
-//         row++;
-//     }
-//     return (SUCCESS);
-// }
-
 int copy_map_from_temp(t_game *game, int map_start)
 {
     int row;

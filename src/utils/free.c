@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 05:55:56 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 17:04:57 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 17:18:55 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ void free_game_resources(t_game *game)
 
 void	free_all(t_game *game)
 {
-	//ADD free the map
-	free(game->map_data.wall_tex); // free the texture
+	free(game->map_data.wall_tex);
 }
