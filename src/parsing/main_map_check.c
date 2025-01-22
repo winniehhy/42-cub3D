@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_map_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 21:29:38 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/16 23:57:41 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:23:48 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	validate_player_start(t_game *game)
 	if (map_start == -1)
 		return (FAILURE);
 	player_count = count_players(game, map_start);
-	return (player_count == 1) ? SUCCESS : FAILURE;
+	if (player_count == 1)
+		return (SUCCESS);
+	else
+		return (FAILURE);
 }
 
 int	validate_map_chars(t_game *game)
