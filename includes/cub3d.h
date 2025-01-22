@@ -6,44 +6,38 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 18:17:05 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:35:08 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include "../minilibx-linux/mlx.h"
-#include <../libft/libft.h>
-#include <math.h>
-#include <stdio.h> 
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <fcntl.h>
-#include <limits.h>
-#include <X11/X.h> //for mouse events
-#define mapWidth 18
-#define mapHeight 10
-// RATIO: 4:3
-// NOTE: any size of screen and wall size works, as long as player does not spawn outside the walls (it wil seg fault)
-#define screenWidth 1280 
-#define screenHeight 960
-#define WALL_SIZE 63
-#define TEXTURE_SIZE 64
+# include "minilibx-linux/mlx.h"
+# include "libft/libft.h"
+# include <math.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <X11/X.h>
 
-#define MOVE_SPEED 0.05
-#define ROTATE_SPEED 0.02
-
-#define VERTICAL 0
-#define HORIZONTAL 1
-
-#define FAILURE 0
-#define SUCCESS 1
-
-#define FALSE 0
-#define TRUE 1
-
+# define MAPWIDTH 18
+# define MAPHEIGHT 10
+# define SCREENWIDTH 1280
+# define SCREENHEIGHT 960
+# define WALL_SIZE 63
+# define TEXTURE_SIZE 64
+# define MOVE_SPEED 0.05
+# define ROTATE_SPEED 0.02
+# define VERTICAL 0
+# define HORIZONTAL 1
+# define FAILURE 0
+# define SUCCESS 1
+# define FALSE 0
+# define TRUE 1
 # define W 119
 # define A 97
 # define S 115
@@ -52,27 +46,26 @@
 # define LEFT 65361
 # define RIGHT 65363
 # define ESC 65307
-
-#define PI 3.14159265359
-#define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
+# define PI 3.14159265359
+# define EXIT_SUCCESS 0
+# define EXIT_FAILURE 1
 
 enum e_direction
 {
 	NORTH = 0,
 	SOUTH = 1,
 	WEST = 2,
-	EAST = 3,
+	EAST = 3
 };
 
 typedef struct s_rgb
 {
-    int r;
-    int g;
-    int b;
-} t_rgb;
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
 
-typedef	struct s_img
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
@@ -83,21 +76,22 @@ typedef	struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_torch {
-    t_img   img;            
-    double  bob_offset;     // For swaying animation
-    double  bob_direction;  // Direction of sway
-} t_torch;
+typedef struct s_torch
+{
+	t_img	img;
+	double	bob_offset;
+	double	bob_direction;
+}	t_torch;
 
 typedef struct s_map_data
 {
-	t_img	*wall_tex; //array of 4 for the wall textures
+	t_img	*wall_tex;
 	size_t	c_rgb;
 	size_t	f_rgb;
-    char    **map;
-    int     width;
-    int     height;
-} t_map_data;
+	char	**map;
+	int		width;
+	int		height;
+}	t_map_data;
 
 typedef struct s_player
 {
@@ -108,16 +102,13 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-	// int		moved_x;
-	// int		moved_y;
-	// int		rotated;
 	bool	key_up;
 	bool	key_down;
-	bool 	key_left;
+	bool	key_left;
 	bool	key_right;
 	bool	left_rotate;
 	bool	right_rotate;
-	bool 	mouse;
+	bool	mouse;
 	float	angle;
 }	t_player;
 
@@ -128,12 +119,12 @@ typedef struct s_ray
 	double	dir_y;
 	int		map_x;
 	int		map_y;
-	double	side_dist_x; // total x distance
-	double	side_dist_y; // total y distance
-	double	delta_dist_x; //step x - from one vertical line to the next
-	double	delta_dist_y; //step y - from one horizontal line to the next
-	int		map_step_x; //step direction (used for map)
-	int		map_step_y; //step direction
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		map_step_x;
+	int		map_step_y;
 	int		side;
 	double	wall_dist;
 	double	wall_x;
@@ -151,44 +142,43 @@ typedef struct s_game
 	int			endian;
 	t_player	player;
 	t_ray		ray;
-	t_map_data  map_data;
-	t_torch     torch; 
+	t_map_data	map_data;
+	t_torch		torch;
 	char		**map;
-	 int temp_rows;
-	char **temp_map;
+	int			temp_rows;
+	char		**temp_map;
 }	t_game;
 
-void			init_player(t_player *player);
-int				key_press(int keycode, t_game *game);
-int				key_release(int keycode, t_player *player);
-void			move_player(t_game *game, t_player *player);
-bool			touch(t_game *game, float px, float py);
+void	init_player(t_player *player);
+int		key_press(int keycode, t_game *game);
+int		key_release(int keycode, t_player *player);
+void	move_player(t_game *game, t_player *player);
+bool	touch(t_game *game, float px, float py);
 
 //player.c
-bool 	init_player_position(t_game *game);
-
+bool	init_player_position(t_game *game);
 
 //mouse.c
-int mouse_pov(int x, int y, t_game *game);
+int		mouse_pov(int x, int y, t_game *game);
 
 //torch.c
-void init_torch(t_game *game);
-int get_torch_pixel(t_img *img, int x, int y);
-void draw_torch(t_game *game);
-
+void	init_torch(t_game *game);
+int		get_torch_pixel(t_img *img, int x, int y);
+void	draw_torch(t_game *game);
 
 //init.c
-void			init_game(t_game *game, char *map_file);
-char 			**get_map(const char *file);
-void 			init_mlx(t_game *game);
-int 			load_texture(t_game *game, t_img *tex, char *path);
+void	init_game(t_game *game, char *map_file);
+char 	**get_map(const char *file);
+void 	init_mlx(t_game *game);
+int		load_texture(t_game *game, t_img *tex, char *path);
+
 //init_2.c
-int init_texture(t_game *game);
+int		init_texture(t_game *game);
 
 //utils.c
-void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
-void			draw_square(int x, int y, int size, int color, t_game *game);
-void 			setup_hooks(t_game *game);
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+void	draw_square(int x, int y, int size, int color, t_game *game);
+void	setup_hooks(t_game *game);
 
 //texture.c
 unsigned int	get_pixel_color(t_img *tex, int x, int y);
