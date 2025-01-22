@@ -6,12 +6,22 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:38:20 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 17:37:30 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 20:06:39 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/**
+ * valid_input - Validates the input file's extension.
+ * @ac: The argument count (expected to be 2 for file validation).
+ * @filepath: The path of the file provided as input.
+ * 
+ * Checks if the provided file has the `.cub` extension. If not, 
+ * prints an error message and returns false.
+ * 
+ * Return: true if the file extension is valid, false otherwise.
+ */
 bool	valid_input(int ac, char *filepath)
 {
 	if (ft_strcmp(filepath + ft_strlen(filepath) - 4, ".cub") != 0)
@@ -22,6 +32,20 @@ bool	valid_input(int ac, char *filepath)
 	return (true);
 }
 
+/**
+ * valid_file - Validates the file and processes its contents for the game.
+ * @file_path: The path to the file being validated.
+ * @game: Pointer to the game structure.
+ * 
+ * Performs multiple validation and processing steps, including:
+ * - Checking the temporary file size.
+ * - Creating a temporary map from the file.
+ * - Parsing the temporary map for further use.
+ * If any of these steps fail, the function cleans up resources and
+ * returns FAILURE.
+ * 
+ * Return: SUCCESS if all steps succeed, FAILURE otherwise.
+ */
 int	valid_file(char *file_path, t_game *game)
 {
 	if (get_temp_file_size(file_path, game) == FAILURE)
@@ -36,6 +60,17 @@ int	valid_file(char *file_path, t_game *game)
 	return (SUCCESS);
 }
 
+/**
+ * valid_texture - Validates and loads the textures for the game.
+ * @game: Pointer to the game structure.
+ * @file_path: The path to the map file containing texture information.
+ * 
+ * Checks if the game structure, its components, and the file path
+ * are valid. Then it parses the directions and validates that all
+ * textures are properly loaded and usable.
+ * 
+ * Return: TRUE if all textures are valid, FALSE otherwise.
+ */
 int	valid_texture(t_game *game, char *file_path)
 {
 	if (!game || !game->mlx || !file_path)

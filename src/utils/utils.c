@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:23:02 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 18:29:45 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 20:24:01 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 void	free_all(t_game *game)
 {
+	size_t	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		mlx_destroy_image(game->mlx, game->map_data.wall_tex[i].img);
+		i++;
+	}
 	free(game->map_data.wall_tex);
 }
 

@@ -6,12 +6,21 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:01:05 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 17:46:25 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 20:05:28 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/**
+ * validate_xpm_format - Validates if the given file path is a valid `.xpm` file.
+ * @path: The file path to validate.
+ * 
+ * Checks if the file path is not NULL, has the `.xpm` extension, and
+ * if the file exists and can be opened for reading.
+ * 
+ * Return: TRUE if valid, FALSE otherwise.
+ */
 int	validate_xpm_format(char *path)
 {
 	int	fd;
@@ -27,6 +36,17 @@ int	validate_xpm_format(char *path)
 	return (TRUE);
 }
 
+/**
+ * process_direction - Processes and loads a texture for a specific direction.
+ * @line: The line containing the texture path.
+ * @game: Pointer to the game structure.
+ * @direction: The direction (NORTH, SOUTH, WEST, EAST) being processed.
+ * 
+ * Extracts the texture path from the line, removes any trailing newline,
+ * and attempts to load the texture for the specified direction.
+ * 
+ * Return: TRUE if successful, FALSE otherwise.
+ */
 int	process_direction(char *line, t_game *game, int direction)
 {
 	char	*path;
@@ -50,6 +70,17 @@ int	process_direction(char *line, t_game *game, int direction)
 	return (TRUE);
 }
 
+/**
+ * check_direction - Checks and processes a texture for a specific direction.
+ * @tmp: The line containing the direction and texture path.
+ * @game: Pointer to the game structure.
+ * @found: Array tracking whether textures for directions are already found.
+ * 
+ * Parses the line to identify the direction (NO, SO, WE, EA) and
+ * ensures it has not already been processed. If valid, processes the texture.
+ * 
+ * Return: Always returns 1 (used to continue parsing).
+ */
 int	check_direction(char *tmp, t_game *game, bool *found)
 {
 	if (ft_strncmp(tmp, "NO", 2) == 0 && !found[NORTH])
@@ -63,6 +94,16 @@ int	check_direction(char *tmp, t_game *game, bool *found)
 	return (1);
 }
 
+/**
+ * parse_directions - Parses a map file to load textures for all directions.
+ * @game: Pointer to the game structure.
+ * @file_path: The path to the map file.
+ * 
+ * Reads the map file line by line and extracts texture paths for the
+ * NORTH, SOUTH, WEST, and EAST directions. Ensures all directions are found.
+ * 
+ * Return: TRUE if all directions are successfully loaded, FALSE otherwise.
+ */
 int	parse_directions(t_game *game, char *file_path)
 {
 	int		fd;
@@ -90,6 +131,15 @@ int	parse_directions(t_game *game, char *file_path)
 	return (found[NORTH] && found[SOUTH] && found[WEST] && found[EAST]);
 }
 
+/**
+ * validate_loaded_textures - Validates the loaded textures for correctness.
+ * @game: Pointer to the game structure.
+ * 
+ * Checks that all textures are properly loaded, have valid dimensions,
+ * and contain non-null image and address data.
+ * 
+ * Return: TRUE if all textures are valid, FALSE otherwise.
+ */
 int	validate_loaded_textures(t_game *game)
 {
 	int		i;

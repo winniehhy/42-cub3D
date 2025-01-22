@@ -6,12 +6,22 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 05:59:45 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 17:54:45 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 20:14:16 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/**
+ * get_temp_file_size - Calculates the number of lines in the input file.
+ * @file_path: Path to the file being processed.
+ * @game: Pointer to the game structure, where the line count is stored.
+ * 
+ * Opens the file, reads each line, and increments the `temp_rows` field in the game structure.
+ * Frees each line after reading to avoid memory leaks. Closes the file at the end.
+ * 
+ * Return: SUCCESS if the file is processed successfully, FAILURE if the file cannot be opened.
+ */
 int	get_temp_file_size(char *file_path, t_game *game)
 {
 	int		fd;
@@ -32,6 +42,17 @@ int	get_temp_file_size(char *file_path, t_game *game)
 	return (SUCCESS);
 }
 
+/**
+ * create_temp_map - Creates a temporary map representation from the input file.
+ * @file_path: Path to the file being processed.
+ * @game: Pointer to the game structure, where the temporary map is stored.
+ * 
+ * Opens the file and allocates memory for the temporary map.
+ * Processes each line and stores it in the `temp_map` field of the game structure.
+ * If any line fails to process, frees resources and returns FAILURE.
+ * 
+ * Return: SUCCESS if the map is created successfully, FAILURE otherwise.
+ */
 int	create_temp_map(char *file_path, t_game *game)
 {
 	int		fd;
@@ -60,6 +81,16 @@ int	create_temp_map(char *file_path, t_game *game)
 	return (SUCCESS);
 }
 
+/**
+ * parse_temp_map - Processes and validates the temporary map.
+ * @game: Pointer to the game structure containing the temporary map.
+ * 
+ * Determines where the map starts, calculates dimensions, allocates memory for the final map,
+ * and copies the validated map data from the temporary map. Frees the temporary map upon success.
+ * If any step fails, frees resources and returns FAILURE.
+ * 
+ * Return: SUCCESS if the map is parsed and validated, FAILURE otherwise.
+ */
 int	parse_temp_map(t_game *game)
 {
 	int	map_start;
@@ -80,6 +111,15 @@ int	parse_temp_map(t_game *game)
 	return (SUCCESS);
 }
 
+/**
+ * free_temp_map - Frees all memory allocated for the temporary map.
+ * @game: Pointer to the game structure containing the temporary map.
+ * 
+ * Iterates through each row of the `temp_map` field, frees each row,
+ * and then frees the entire temporary map. Sets the `temp_map` pointer to NULL.
+ * 
+ * Return: None.
+ */
 void	free_temp_map(t_game *game)
 {
 	int	i;
@@ -96,6 +136,16 @@ void	free_temp_map(t_game *game)
 	game->temp_map = NULL;
 }
 
+/**
+ * free_partial_temp - Frees a partially created temporary map.
+ * @game: Pointer to the game structure containing the temporary map.
+ * @current_row: The number of rows successfully processed before an error occurred.
+ * 
+ * Frees all rows up to the specified `current_row` and then frees the map itself.
+ * Used to clean up memory in case of an error during map creation.
+ * 
+ * Return: None.
+ */
 void	free_partial_temp(t_game *game, int current_row)
 {
 	int	i;
