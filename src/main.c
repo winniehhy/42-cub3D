@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/21 12:43:05 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 15:32:12 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int draw_loop(t_game *game)
     clear_image(game);
     set_ceiling_floor(game);
     raycast(game);
-    draw_torch(game);
+    // draw_torch(game);
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
     return (0);
 }

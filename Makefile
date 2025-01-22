@@ -38,6 +38,7 @@ SRC_FILES = main.c \
 			$(VALDIR)valid_file_utils.c\
 			$(VALDIR)valid_file_mem.c\
 			$(VALDIR)valid_texture.c\
+			$(VALDIR)parse_color.c\
 			$(PARDIR)main_map_check.c\
 			$(PARDIR)map_check_utils.c\
 			$(PARDIR)map_check.c\
@@ -78,7 +79,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 	@mkdir -p $(OBJDIR)initialize
 	@mkdir -p $(OBJDIR)raycast
 	@mkdir -p $(OBJDIR)player
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC)  $(INCLUDES) -c $< -o $@
 
 $(OBJDIR)%.o: $(INITDIR)%.c
 	@mkdir -p $(OBJDIR)
