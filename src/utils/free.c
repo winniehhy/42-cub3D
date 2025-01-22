@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 05:55:56 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/16 05:56:08 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:10:45 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void free_map(char **map)
-{
-    int i = 0;
-
-    if (map == NULL)
-        return;
-
-    while (map[i])
-    {
-        free(map[i]);
-        map[i] = NULL;
-        i++;
-    }
-    free(map);
-}
 
 void free_textures(t_img *wall_tex, void *mlx)
 {
@@ -66,4 +50,19 @@ void free_game_resources(t_game *game)
     free_map(game->map_data.map);
     free_textures(game->map_data.wall_tex, game->mlx);
     free_mlx_resources(game->mlx, game->win);
+}
+
+void	free_array(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }

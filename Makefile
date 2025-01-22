@@ -34,11 +34,13 @@ SRC_FILES = main.c \
             $(RAYCASTDIR)raycast_utils.c \
 			$(RAYCASTDIR)texture.c \
 			$(UTILSDIR)utils.c \
+			$(UTILSDIR)free.c\
 			$(VALDIR)valid_file.c\
 			$(VALDIR)valid_file_utils.c\
 			$(VALDIR)valid_file_mem.c\
 			$(VALDIR)valid_texture.c\
 			$(VALDIR)parse_color.c\
+			$(VALDIR)color_utils.c\
 			$(PARDIR)main_map_check.c\
 			$(PARDIR)map_check_utils.c\
 			$(PARDIR)map_check.c\

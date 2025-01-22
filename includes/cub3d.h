@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 17:55:30 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:17:05 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ void	free_all(t_game *game);
 void	print_err_msg(char *msg);
 int	open_file_and_allocate_map(char *file_path, t_game *game);
 int	process_line(char *line, t_game *game, int i);
+void	free_array(char **arr);
 
 /* Parsing */
 //main_map_check.c
@@ -286,6 +287,14 @@ void free_partial_temp(t_game *game, int current_row);
 size_t create_rgb(int r, int g, int b);
 int process_map_line(char *line, t_game *game);
 int parse_map_colors(char *file_path, t_game *game);
+int	parse_color_values(char *line, size_t *packed_color);
+int	process_color_line(char *line, t_game *game,int *floor_found, int *ceiling_found);
+
+//color_utils.c
+void	trim_color_values(char **colors);
+int	validate_color_values(char **colors, int *r, int *g, int *b);
+int	handle_color_line(char *line, t_game *game, int *floor_found, int *ceiling_found);
+int	validate_colors(t_game *game, int floor_found, int ceiling_found);
 
 //main.c
 void 	init_all(t_game *game, char *map_file, char *texture_file);
