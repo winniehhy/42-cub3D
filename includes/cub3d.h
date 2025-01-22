@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 18:35:08 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 19:02:49 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,155 +149,157 @@ typedef struct s_game
 	char		**temp_map;
 }	t_game;
 
-void	init_player(t_player *player);
-int		key_press(int keycode, t_game *game);
-int		key_release(int keycode, t_player *player);
-void	move_player(t_game *game, t_player *player);
-bool	touch(t_game *game, float px, float py);
+void			init_player(t_player *player);
+int				key_press(int keycode, t_game *game);
+int				key_release(int keycode, t_player *player);
+void			move_player(t_game *game, t_player *player);
+bool			touch(t_game *game, float px, float py);
 
 //player.c
-bool	init_player_position(t_game *game);
+bool			init_player_position(t_game *game);
 
 //mouse.c
-int		mouse_pov(int x, int y, t_game *game);
+int				mouse_pov(int x, int y, t_game *game);
 
 //torch.c
-void	init_torch(t_game *game);
-int		get_torch_pixel(t_img *img, int x, int y);
-void	draw_torch(t_game *game);
+void			init_torch(t_game *game);
+int				get_torch_pixel(t_img *img, int x, int y);
+void			draw_torch(t_game *game);
 
 //init.c
-void	init_game(t_game *game, char *map_file);
-char 	**get_map(const char *file);
-void 	init_mlx(t_game *game);
-int		load_texture(t_game *game, t_img *tex, char *path);
+void			init_game(t_game *game, char *map_file);
+char			**get_map(const char *file);
+void			init_mlx(t_game *game);
+int				load_texture(t_game *game, t_img *tex, char *path);
 
 //init_2.c
-int		init_texture(t_game *game);
+int				init_texture(t_game *game);
 
 //utils.c
-void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
-void	draw_square(int x, int y, int size, int color, t_game *game);
-void	setup_hooks(t_game *game);
+void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
+void			draw_square(int x, int y, int size, int color, t_game *game);
+void			setup_hooks(t_game *game);
 
 //texture.c
 unsigned int	get_pixel_color(t_img *tex, int x, int y);
-void			put_wall_texture(t_game *game, int screen_x, int screen_y, int line_height);
+void			put_wall_texture(t_game *game, int screen_x, int screen_y,
+								int line_height);
 
 //render.c
-void			three_d_projection(t_game *game, float ray_x, float ray_y, int x);
+void			three_d_projection(t_game *game, float ray_x, float ray_y,
+                int x);
 
 //raycast.c
 void			raycast(t_game *game);
-void   			set_ceiling_floor(t_game *game);
+void			set_ceiling_floor(t_game *game);
 void			clear_image(t_game *game);
 
 //raycast_utils.c
-void    init_ray(t_player *player, t_ray *ray, int x);
-void    get_initial_dist(t_player *player, t_ray *ray);
-void    dda_algo(t_game *game, t_player *player, t_ray *ray);
-void    calc_wall_dist(t_ray *ray);
-void	draw_line_on_image(t_game *game, t_ray *ray, int x);
+void			init_ray(t_player *player, t_ray *ray, int x);
+void			get_initial_dist(t_player *player, t_ray *ray);
+void			dda_algo(t_game *game, t_player *player, t_ray *ray);
+void			calc_wall_dist(t_ray *ray);
+void			draw_line_on_image(t_game *game, t_ray *ray, int x);
 
 //texture.c
-void	get_vertical_texture(t_game *game);
+void			get_vertical_texture(t_game *game);
 
 //utils.c
-void	free_all(t_game *game);
-void	print_err_msg(char *msg);
-int	open_file_and_allocate_map(char *file_path, t_game *game);
-int	process_line(char *line, t_game *game, int i);
-void	free_array(char **arr);
+void			free_all(t_game *game);
+void			print_err_msg(char *msg);
+int				open_file_and_allocate_map(char *file_path, t_game *game);
+int				process_line(char *line, t_game *game, int i);
+void			free_array(char **arr);
 
 /* Parsing */
 //main_map_check.c
-int	map_checking(t_game *game);
-int	validate_map_walls(t_game *game);
-int	validate_player_start(t_game *game);
-int	validate_map_chars(t_game *game);
+int				map_checking(t_game *game);
+int				validate_map_walls(t_game *game);
+int				validate_player_start(t_game *game);
+int				validate_map_chars(t_game *game);
 
 //map_check.c
-int	check_first_last_row(char **map, int height);
-int	check_row_edges(char **map, int row, int height);
-int	check_config_identifier(char *line, int i);
-int	count_players(t_game *game, int map_start);
-void	set_player_position(t_game *game, int i, int j, int map_start);
+int				check_first_last_row(char **map, int height);
+int				check_row_edges(char **map, int row, int height);
+int				check_config_identifier(char *line, int i);
+int				count_players(t_game *game, int map_start);
+void			set_player_position(t_game *game, int i, int j, int map_start);
 
 //map_check_utils.c
-char **copy_map(char **original_map, int height);
-void free_map(char **map);
-void print_err_msg(char *msg);
-int	is_valid_map_char(char c);
-int	is_player_char(char c);
+char			**copy_map(char **original_map, int height);
+void			free_map(char **map);
+void			print_err_msg(char *msg);
+int				is_valid_map_char(char c);
+int				is_player_char(char c);
 
 //map_utils.c
-void free_map_data(t_game *game);
-int	is_map_line(char *line);
-int	find_map_start(char **map, int height);
-void	player_north_south(t_game *game, int i, int j);
-void	player_east_west(t_game *game, int i, int j);
+void			free_map_data(t_game *game);
+int				is_map_line(char *line);
+int				find_map_start(char **map, int height);
+void			player_north_south(t_game *game, int i, int j);
+void			player_east_west(t_game *game, int i, int j);
 
 //map_wall.c
-int	check_surrounding_walls(char **map, int row, int col);
-int	is_surrounded_by_walls(char **map, int row, int col, int height);
-int	is_position_valid(char **map, int row, int col, int height);
-void	convert_spaces_to_walls(t_game *game);
-int	check_map_chars_row(char **map, int row);
+int				check_surrounding_walls(char **map, int row, int col);
+int				is_surrounded_by_walls(char **map, int row, int col,
+				int height);
+int				is_position_valid(char **map, int row, int col, int height);
+void			convert_spaces_to_walls(t_game *game);
+int				check_map_chars_row(char **map, int row);
 
 /*Validate*/
 //valid_file.c
-int go_to_check_file(char *file_path, t_game *game);
-int valid_texture(t_game *game, char *file_path);
-int valid_file(char *file_path, t_game *game);
-bool valid_input(int ac, char *filepath);
+int				go_to_check_file(char *file_path, t_game *game);
+int				valid_texture(t_game *game, char *file_path);
+int				valid_file(char *file_path, t_game *game);
+bool			valid_input(int ac, char *filepath);
 
 //valid_texture.c
-int validate_xpm_format(char *path);
-int process_direction(char *line, t_game *game, int direction);
-int parse_directions(t_game *game, char *file_path);
-int validate_rgb(size_t color);
-int check_rgb_colors(t_map_data *map_data);
-int validate_loaded_textures(t_game *game);
+int				validate_xpm_format(char *path);
+int				process_direction(char *line, t_game *game, int direction);
+int				parse_directions(t_game *game, char *file_path);
+int				validate_rgb(size_t color);
+int				check_rgb_colors(t_map_data *map_data);
+int				validate_loaded_textures(t_game *game);
 
 //valid_file_mem.c
-int get_map_dimensions(t_game *game, int map_start);
-int allocate_final_map(t_game *game);
-int copy_map_from_temp(t_game *game, int map_start);
-void free_partial_map(t_game *game, int current_row);
+int				get_map_dimensions(t_game *game, int map_start);
+int				allocate_final_map(t_game *game);
+int				copy_map_from_temp(t_game *game, int map_start);
+void			free_partial_map(t_game *game, int current_row);
 
 //valid_file_utils.c
-int get_temp_file_size(char *file_path, t_game *game);
-int create_temp_map(char *file_path, t_game *game);
-int parse_temp_map(t_game *game);
-void free_temp_map(t_game *game);
-void free_partial_temp(t_game *game, int current_row);
-
+int				get_temp_file_size(char *file_path, t_game *game);
+int				create_temp_map(char *file_path, t_game *game);
+int				parse_temp_map(t_game *game);
+void			free_temp_map(t_game *game);
+void			free_partial_temp(t_game *game, int current_row);
 
 //parse_tex_color.c
-size_t create_rgb(int r, int g, int b);
-int process_map_line(char *line, t_game *game);
-int parse_map_colors(char *file_path, t_game *game);
-int	parse_color_values(char *line, size_t *packed_color);
-int	process_color_line(char *line, t_game *game,int *floor_found, int *ceiling_found);
+size_t			create_rgb(int r, int g, int b);
+int				process_map_line(char *line, t_game *game);
+int				parse_map_colors(char *file_path, t_game *game);
+int				parse_color_values(char *line, size_t *packed_color);
+int				process_color_line(char *line, t_game *game,int *floor_found, int *ceiling_found);
 
 //color_utils.c
-void	trim_color_values(char **colors);
-int	validate_color_values(char **colors, int *r, int *g, int *b);
-int	handle_color_line(char *line, t_game *game, int *floor_found, int *ceiling_found);
-int	validate_colors(t_game *game, int floor_found, int ceiling_found);
+void			trim_color_values(char **colors);
+int				validate_color_values(char **colors, int *r, int *g, int *b);
+int				handle_color_line(char *line, t_game *game, int *floor_found, int *ceiling_found);
+int				validate_colors(t_game *game, int floor_found, int ceiling_found);
 
 //main.c
-void 	init_all(t_game *game, char *map_file, char *texture_file);
-int		draw_loop(t_game *game);
+void			init_all(t_game *game, char *map_file, char *texture_file);
+int				draw_loop(t_game *game);
 
 //movement.c
-void	move_up(t_game *game);
-void	move_down(t_game *game);
-void	move_left(t_game *game);
-void	move_right(t_game *game);
+void			move_up(t_game *game);
+void			move_down(t_game *game);
+void			move_left(t_game *game);
+void			move_right(t_game *game);
 
 //rotate.c
-void	rotate_left(t_game *game);
-void	rotate_right(t_game *game);
+void			rotate_left(t_game *game);
+void			rotate_right(t_game *game);
 
 #endif
