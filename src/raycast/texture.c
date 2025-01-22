@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:20:03 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/12 13:45:03 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/22 19:18:36 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void	put_wall_texture(t_game *game, int scr_x, int scr_y, int line_height)
 
     //Calculate texture y coordinate
     tex_step_y = (double) game->map_data.wall_tex[side].height / (double) line_height;
-    tex_y = (int)((double) (scr_y - (screenHeight / 2 - line_height / 2)) * tex_step_y);
+    tex_y = (int)((double) (scr_y - (SCREENHEIGHT / 2 - line_height / 2)) * tex_step_y);
     my_mlx_pixel_put(game, scr_x, scr_y, get_pixel_color(&game->map_data.wall_tex[side], tex_x, tex_y));
 }

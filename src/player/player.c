@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:48:45 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/20 15:06:40 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 19:14:54 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int key_press(int keycode, t_game *game)
     else
     {
         mlx_mouse_hide(game->mlx, game->win);
-        mlx_mouse_move(game->mlx, game->win, screenWidth / 2, screenHeight / 2);
+        mlx_mouse_move(game->mlx, game->win, SCREENWIDTH / 2, SCREENHEIGHT / 2);
     }
 }
 	if (keycode == ESC)

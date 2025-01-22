@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:31:14 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 14:17:00 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 19:14:13 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void    init_mlx(t_game *game)
         printf("Error: Failed to initialize mlx\n");
         exit(EXIT_FAILURE);
     }
-    game->win = mlx_new_window(game->mlx, screenWidth, screenHeight, "Raycast Test");
+    game->win = mlx_new_window(game->mlx, SCREENWIDTH, SCREENHEIGHT, "Raycast Test");
     if (!game->win)
     {
         printf("Error: Failed to create window\n");
         exit(EXIT_FAILURE);
     }
-    game->img = mlx_new_image(game->mlx, screenWidth, screenHeight);
+    game->img = mlx_new_image(game->mlx, SCREENWIDTH, SCREENHEIGHT);
     if (!game->img)
     {
         printf("Error: Failed to create image\n");

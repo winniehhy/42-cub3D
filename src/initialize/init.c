@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:55:12 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 14:14:54 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 19:16:41 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void init_all(t_game *game, char *map_file, char *texture_file)
     init_player(&game->player);
     init_mlx(game);
     init_texture(game);
-    //init_torch(game);
     
     // Initialize map_data
     game->map_data.map = NULL;

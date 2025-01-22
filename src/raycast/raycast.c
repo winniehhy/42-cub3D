@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:33:48 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/16 17:31:19 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 19:18:22 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x >= screenWidth || y >= screenHeight || x < 0 || y < 0)
+	if (x >= SCREENWIDTH || y >= SCREENHEIGHT || x < 0 || y < 0)
 		return ;
 	dst = game->data + (y * game->line_length + x * (game->bits_per_pixel / 8));
 	*(unsigned int*) dst = color;
@@ -28,10 +28,10 @@ void    clear_image(t_game *game)
 	int y;
 
 	x = -1;
-	while (++x < screenWidth)
+	while (++x < SCREENWIDTH)
 	{
 		y = -1;
-		while (++y < screenHeight)
+		while (++y < SCREENHEIGHT)
 			my_mlx_pixel_put(game, x, y, 0);
 	}
 }
@@ -42,12 +42,12 @@ void    set_ceiling_floor(t_game *game)
     int y;
 
     x = -1;
-    while (++x < screenWidth)
+    while (++x < SCREENWIDTH)
     {
         y = -1;
-        while (++y < screenHeight)
+        while (++y < SCREENHEIGHT)
         {
-            if (y < screenHeight / 2)
+            if (y < SCREENHEIGHT / 2)
                 my_mlx_pixel_put(game, x, y, game->map_data.c_rgb);
             else
                 my_mlx_pixel_put(game, x, y, game->map_data.f_rgb);
@@ -73,7 +73,7 @@ void	raycast(t_game *game)
     int x;
     
     x = -1;
-    while (++x < screenWidth)
+    while (++x < SCREENWIDTH)
     {
         init_ray(&game->player, &game->ray, x);
         get_initial_dist(&game->player, &game->ray);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:44:43 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/16 17:30:48 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 19:17:28 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 void    init_ray(t_player *player, t_ray *ray, int x)
 {
-    ray->camera_perc = 2 * x / (double)screenWidth - 1;
+    ray->camera_perc = 2 * x / (double)SCREENWIDTH - 1;
     ray->dir_x = player->dir_x + player->plane_x * ray->camera_perc;
     ray->dir_y = player->dir_y + player->plane_y * ray->camera_perc;
     ray->map_x = (int)player->pos_x;
@@ -118,9 +118,9 @@ void    draw_line_on_image(t_game *game, t_ray *ray, int x)
     int draw_start;
     int draw_end;
     
-    line_height = (int)(screenHeight / ray->wall_dist);
-    draw_start = screenHeight / 2 - line_height / 2;
-    draw_end = screenHeight / 2 + line_height / 2;
+    line_height = (int)(SCREENHEIGHT / ray->wall_dist);
+    draw_start = SCREENHEIGHT / 2 - line_height / 2;
+    draw_end = SCREENHEIGHT / 2 + line_height / 2;
     while (draw_start < draw_end)
     {
         put_wall_texture(game, x, draw_start, line_height);

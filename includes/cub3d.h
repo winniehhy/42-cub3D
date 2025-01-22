@@ -6,15 +6,15 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 19:02:49 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 19:16:33 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "minilibx-linux/mlx.h"
-# include "libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include "../libft/libft.h"
 # include <math.h>
 # include <stdio.h>
 # include <string.h>
@@ -76,13 +76,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_torch
-{
-	t_img	img;
-	double	bob_offset;
-	double	bob_direction;
-}	t_torch;
-
 typedef struct s_map_data
 {
 	t_img	*wall_tex;
@@ -143,7 +136,6 @@ typedef struct s_game
 	t_player	player;
 	t_ray		ray;
 	t_map_data	map_data;
-	t_torch		torch;
 	char		**map;
 	int			temp_rows;
 	char		**temp_map;
@@ -160,11 +152,6 @@ bool			init_player_position(t_game *game);
 
 //mouse.c
 int				mouse_pov(int x, int y, t_game *game);
-
-//torch.c
-void			init_torch(t_game *game);
-int				get_torch_pixel(t_img *img, int x, int y);
-void			draw_torch(t_game *game);
 
 //init.c
 void			init_game(t_game *game, char *map_file);
