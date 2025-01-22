@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 14:07:23 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/22 17:55:30 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,8 @@ void	get_vertical_texture(t_game *game);
 //utils.c
 void	free_all(t_game *game);
 void	print_err_msg(char *msg);
+int	open_file_and_allocate_map(char *file_path, t_game *game);
+int	process_line(char *line, t_game *game, int i);
 
 /* Parsing */
 //main_map_check.c
