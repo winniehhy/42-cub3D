@@ -36,27 +36,83 @@ int	check_first_last_row(char **map, int height)
 
 // 1. if first = -1 & !\n, , first = len ( start)
 // 2. if current character not space, update len=last
-int	check_row_edges(char **map, int row, int height)
+int check_row_edges(char **map, int row, int height)
 {
-	int	len;
-	int	first;
-	int	last;
+    int len;
+    int first;
+    int last;
 
-	len = 0;
-	first = -1;
-	last = -1;
-	while (map[row][len] && map[row][len] != '\n')
-	{
-		if (first == -1 && map[row][len] != ' ')
-			first = len;
-		if (map[row][len] != ' ')
-			last = len;
-		len++;
-	}
-	if (first != -1 && (map[row][first] != '1' || map[row][last] != '1'))
-		return (FAILURE);
-	return (SUCCESS);
+    len = 0;
+    first = -1;
+    last = -1;
+
+    printf("Debug: Checking row edges for row %d\n", row);
+
+    // Find the first and last non-space character in the row
+    while (map[row][len] && map[row][len] != '\n')
+    {
+        if (map[row][len] != ' ' && first == -1)
+            first = len;
+        if (map[row][len] != ' ')
+            last = len;
+        len++;
+    }
+
+    printf("Debug: First non-space character at %d, last at %d\n", first, last);
+
+    // If the row has no valid walls, skip
+    if (first == -1 || last == -1)
+    {
+        printf("Debug: Row %d has no valid walls, skipping\n", row);
+        return (SUCCESS);
+    }
+
+    // Check the edges of the row (ensure they are walls)
+    if (map[row][first] != '1' || map[row][last] != '1')
+    {
+        printf("Debug: Row %d edges are not walls (first: %c, last: %c)\n", row, map[row][first], map[row][last]);
+        return (FAILURE);
+    }
+
+    // Validate enclosed spaces inside the row
+    len = first;
+    while (len <= last)
+    {
+        if (map[row][len] == '0' || map[row][len] == 'N' || map[row][len] == 'S'
+            || map[row][len] == 'E' || map[row][len] == 'W')
+        {
+            printf("Debug: Found character '%c' at position (%d, %d)\n", map[row][len], row, len);
+
+            // Check above, below, left, and right of each '0' or valid character
+            if (row > 0 && map[row - 1][len] == ' ')
+            {
+                printf("Debug: Character above (%d, %d) is a space\n", row - 1, len);
+                return (FAILURE);
+            }
+            if (row < height - 1 && map[row + 1][len] == ' ')
+            {
+                printf("Debug: Character below (%d, %d) is a space\n", row + 1, len);
+                return (FAILURE);
+            }
+            if (len > 0 && map[row][len - 1] == ' ')
+            {
+                printf("Debug: Character to the left (%d, %d) is a space\n", row, len - 1);
+                return (FAILURE);
+            }
+            if (map[row][len + 1] == ' ')
+            {
+                printf("Debug: Character to the right (%d, %d) is a space\n", row, len + 1);
+                return (FAILURE);
+            }
+        }
+        len++;
+    }
+
+    printf("Debug: Row %d is properly enclosed by walls\n", row);
+    return (SUCCESS);
 }
+
+
 
 int	check_config_identifier(char *line, int i)
 {

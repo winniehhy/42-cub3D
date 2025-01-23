@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/23 14:11:49 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/23 17:23:24 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,5 +293,8 @@ void			move_right(t_game *game);
 //rotate.c
 void			rotate_left(t_game *game);
 void			rotate_right(t_game *game);
+
+//check.c
+bool validate_map_position(const char *file_path);
 
 #endif
