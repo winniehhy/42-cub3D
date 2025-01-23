@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/23 10:26:14 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 11:47:24 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ void			init_game(t_game *game, char *map_file);
 char			**get_map(const char *file);
 void			init_mlx(t_game *game);
 int				load_texture(t_game *game, t_img *tex, char *path);
+int				close_window(t_game *game);
 
 //init_2.c
 int				init_texture(t_game *game);
