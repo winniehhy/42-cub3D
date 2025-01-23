@@ -1,7 +1,7 @@
-NO textures/simonkraft/crystal.xpm
-SO textures/simonkraft/crystal_imac.xpm
-WE textures/simonkraft/crystal_box.xpm
-EA textures/simonkraft/crystal_sign.xpm
+NO textures/crystal.xpm
+SO textures/crystal_imac.xpm
+WE textures/crystal_box.xpm
+EA textures/crystal_sign.xpm
 
 Floor 47,86,118
 C 102,175,210
