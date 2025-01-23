@@ -6,12 +6,13 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 18:05:37 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 18:21:14 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 09:43:43 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+//trim all white space within color value
 void	trim_color_values(char **colors)
 {
 	int		i;

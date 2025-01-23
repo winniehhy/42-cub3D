@@ -6,12 +6,14 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 23:56:34 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 18:26:34 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 10:27:10 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+// N : X = 0, Y = -1 ( facing upward)
+// S : X = 0, Y = 1 ( facing downward)
 void	player_north_south(t_game *game, int i, int j)
 {
 	if (game->map_data.map[i][j] == 'N')
@@ -32,6 +34,8 @@ void	player_north_south(t_game *game, int i, int j)
 	}
 }
 
+// W : X = -1, Y = 0 ( facing left)
+// S : X = 1, Y = 0 ( facing right)
 void	player_east_west(t_game *game, int i, int j)
 {
 	if (game->player.dir == 'W')
@@ -66,6 +70,10 @@ void	free_map_data(t_game *game)
 	game->map_data.map = NULL;
 }
 
+// 1. check null
+// 2. skip leading space
+// 3. check config identifies ( No, SO, WE, EA,F, C)
+// 4. check character is not a space, & is player ( 1,0)
 int	is_map_line(char *line)
 {
 	int	i;
@@ -91,6 +99,21 @@ int	is_map_line(char *line)
 	return (has_valid_char);
 }
 
+/**
+ * Finds the starting index of the map in a given array of strings.
+ *
+ * @map: A double pointer to the array of strings (lines of the map).
+ * @height: The total number of lines in the array (map height).
+ *
+ * This function iterates through the array of strings to locate the first
+ * line that satisfies the following conditions:
+ * 1. The line is not NULL.
+ * 2. The line has a non-zero length (not empty).
+ * 3. The line is recognized as a valid map line (determined by is_map_line()).
+ *
+ * If a valid map line is found, the function returns its index.
+ * If no valid map line is found, the function returns -1.
+ * */
 int	find_map_start(char **map, int height)
 {
 	int	i;

@@ -6,17 +6,21 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:29:52 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 18:20:31 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 09:47:18 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+// << bitwise left shift operator
+// R : 16 bit to left, first 24 byte
 size_t	create_rgb(int r, int g, int b)
 {
 	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }
 
+// 1. trim line till get the actual color value
+// 2. validate trim color if is R, G, B
 int	parse_color_values(char *line, size_t *packed_color)
 {
 	char	**colors;
@@ -46,6 +50,8 @@ int	parse_color_values(char *line, size_t *packed_color)
 	return (SUCCESS);
 }
 
+//process line then store to struct
+//parse color for F and C to f_rgb  & c_rgb
 int	process_map_line(char *line, t_game *game)
 {
 	if (!line || !game)
@@ -67,6 +73,7 @@ int	process_map_line(char *line, t_game *game)
 	return (SUCCESS);
 }
 
+//check whether F , C is found
 int	process_color_line(char *line, t_game *game,
 	int *floor_found, int *ceiling_found)
 {
@@ -85,6 +92,10 @@ int	process_color_line(char *line, t_game *game,
 	return (SUCCESS);
 }
 
+// parse map file and extract C and F color
+// 1. call handle_color_line to read current line
+// 2. if color found , then break
+// 3. validate color found
 int	parse_map_colors(char *file_path, t_game *game)
 {
 	int		fd;

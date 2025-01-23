@@ -6,12 +6,13 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 21:29:38 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 18:23:48 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 10:26:48 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+// main - map_checking
 int	map_checking(t_game *game)
 {
 	if (game->map_data.height < 3)
@@ -26,6 +27,7 @@ int	map_checking(t_game *game)
 	return (SUCCESS);
 }
 
+// validate where all walls are properly closed
 int	validate_map_walls(t_game *game)
 {
 	char	**map;
@@ -50,6 +52,7 @@ int	validate_map_walls(t_game *game)
 	return (SUCCESS);
 }
 
+// find map start and start count player
 int	validate_player_start(t_game *game)
 {
 	int	map_start;
@@ -65,6 +68,7 @@ int	validate_player_start(t_game *game)
 		return (FAILURE);
 }
 
+// check within the map have N, S, E, W, 0, 1
 int	validate_map_chars(t_game *game)
 {
 	int	i;
