@@ -3,38 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:40:59 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 19:15:39 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 14:03:01 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int mouse_pov(int x, int y, t_game *game)
+void	toggle_mouse(t_game *game)
 {
-    static int old_x;
-    int diff_x;
+	game->player.mouse = !game->player.mouse;
+	if (game->player.mouse)
+	{
+		mlx_mouse_show(game->mlx, game->win);
+		game->player.left_rotate = false;
+		game->player.right_rotate = false;
+	}
+	else
+	{
+		mlx_mouse_hide(game->mlx, game->win);
+		mlx_mouse_move(game->mlx, game->win, SCREENWIDTH / 2, SCREENHEIGHT / 2);
+	}
+}
 
-    (void)y;  // We don't use y coordinate for rotation
-    
-    // Only handle mouse motion if mouse is hidden (game mode)
-    if (!game->player.mouse)
-    {
-        diff_x = x - old_x;
-        if (diff_x > 0)
-            rotate_right(game);
-        else if (diff_x < 0)
-            rotate_left(game);
-            
-        // Reset mouse position if it gets too close to screen edges
-        if (old_x > SCREENWIDTH - 100)  // 100 pixels from edge
-            mlx_mouse_move(game->mlx, game->win, SCREENHEIGHT / 2, SCREENHEIGHT / 2);
-        if (old_x < 100)  // 100 pixels from edge
-            mlx_mouse_move(game->mlx, game->win, SCREENWIDTH / 2, SCREENHEIGHT / 2);
-    }
-    
-    old_x = x;
-    return (0);
+int	mouse_pov(int x, int y, t_game *game)
+{
+	static int	old_x;
+	int			diff_x;
+
+	(void) y;
+	if (!game->player.mouse)
+	{
+		diff_x = x - old_x;
+		if (diff_x > 0)
+			rotate_right(game);
+		else if (diff_x < 0)
+			rotate_left(game);
+		if (old_x > SCREENWIDTH - 100)
+			mlx_mouse_move(game->mlx, game->win,
+				SCREENHEIGHT / 2, SCREENHEIGHT / 2);
+		if (old_x < 100)
+			mlx_mouse_move(game->mlx, game->win,
+				SCREENWIDTH / 2, SCREENHEIGHT / 2);
+	}
+	old_x = x;
+	return (0);
 }

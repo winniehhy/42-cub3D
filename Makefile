@@ -26,6 +26,7 @@ SRC_FILES = main.c \
             $(INITDIR)init.c \
             $(INITDIR)init_utils.c \
             $(PLAYERDIR)player.c \
+			$(PLAYERDIR)key_press.c \
             $(PLAYERDIR)rotate.c \
 			$(PLAYERDIR)mouse.c \
 			$(PLAYERDIR)movement.c \

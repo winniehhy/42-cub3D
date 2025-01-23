@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/23 11:57:42 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 14:11:49 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define SCREENHEIGHT 960
 # define WALL_SIZE 63
 # define TEXTURE_SIZE 64
-# define MOVE_SPEED 0.05
+# define MV_SPD 0.05
 # define ROTATE_SPEED 0.02
 # define VERTICAL 0
 # define HORIZONTAL 1
@@ -142,16 +142,19 @@ typedef struct s_game
 }	t_game;
 
 void			init_player(t_player *player);
-int				key_press(int keycode, t_game *game);
-int				key_release(int keycode, t_player *player);
 void			move_player(t_game *game, t_player *player);
 bool			touch(t_game *game, float px, float py);
+
+//key_press.c
+int				key_press(int keycode, t_game *game);
+int				key_release(int keycode, t_player *player);
 
 //player.c
 bool			init_player_position(t_game *game);
 
 //mouse.c
 int				mouse_pov(int x, int y, t_game *game);
+void			toggle_mouse(t_game *game);
 
 //init.c
 void			init_game(t_game *game, char *map_file);
@@ -165,17 +168,16 @@ int				init_texture(t_game *game);
 
 //utils.c
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
-void			draw_square(int x, int y, int size, int color, t_game *game);
 void			setup_hooks(t_game *game);
 
 //texture.c
 unsigned int	get_pixel_color(t_img *tex, int x, int y);
 void			put_wall_texture(t_game *game, int screen_x, int screen_y,
-		int line_height);
+					int line_height);
 
 //render.c
 void			three_d_projection(t_game *game, float ray_x, float ray_y,
-                int x);
+					int x);
 
 //raycast.c
 void			raycast(t_game *game);
@@ -229,7 +231,7 @@ void			player_east_west(t_game *game, int i, int j);
 //map_wall.c
 int				check_surrounding_walls(char **map, int row, int col);
 int				is_surrounded_by_walls(char **map, int row, int col,
-				int height);
+					int height);
 int				is_position_valid(char **map, int row, int col, int height);
 void			convert_spaces_to_walls(t_game *game);
 int				check_map_chars_row(char **map, int row);
@@ -267,13 +269,16 @@ size_t			create_rgb(int r, int g, int b);
 int				process_map_line(char *line, t_game *game);
 int				parse_map_colors(char *file_path, t_game *game);
 int				parse_color_values(char *line, size_t *packed_color);
-int				process_color_line(char *line, t_game *game,int *floor_found, int *ceiling_found);
+int				process_color_line(char *line, t_game *game,
+					int *floor_found, int *ceiling_found);
 
 //color_utils.c
 void			trim_color_values(char **colors);
 int				validate_color_values(char **colors, int *r, int *g, int *b);
-int				handle_color_line(char *line, t_game *game, int *floor_found, int *ceiling_found);
-int				validate_colors(t_game *game, int floor_found, int ceiling_found);
+int				handle_color_line(char *line, t_game *game,
+					int *floor_found, int *ceiling_found);
+int				validate_colors(t_game *game, int floor_found,
+					int ceiling_found);
 
 //main.c
 void			init_all(t_game *game, char *map_file, char *texture_file);
