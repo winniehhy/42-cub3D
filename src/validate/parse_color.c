@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:29:52 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 17:21:51 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 20:00:46 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,110 +52,54 @@ int	parse_color_values(char *line, size_t *packed_color)
 
 //process line then store to struct
 //parse color for F and C to f_rgb  & c_rgb
-int process_map_line(char *line, t_game *game)
+int	process_map_line(char *line, t_game *game)
 {
-    if (!line || !game)
-        return (FAILURE);
-
-    // Trim leading whitespace
-    while (*line && (*line == ' ' || *line == '\t'))
-        line++;
-
-    // Reject empty or invalid lines
-    if (!*line)
-        return (SUCCESS);
-
-    // Process 'F' or 'C' lines
-    if (line[0] == 'F')
-    {
-        if (parse_color_values(line, &game->map_data.f_rgb) == FAILURE)
-            return (print_err_msg("Invalid floor color format"), FAILURE);
-    }
-    else if (line[0] == 'C')
-    {
-        if (parse_color_values(line, &game->map_data.c_rgb) == FAILURE)
-            return (print_err_msg("Invalid ceiling color format"), FAILURE);
-    }
-    else
-    {
-        // Any line that isn't 'F' or 'C' is invalid
-        return (print_err_msg("Invalid line format"), FAILURE);
-    }
-
-    return (SUCCESS);
+	if (!line || !game)
+		return (FAILURE);
+	while (*line && (*line == ' ' || *line == '\t'))
+		line++;
+	if (!*line)
+		return (SUCCESS);
+	if (line[0] == 'F')
+	{
+		if (parse_color_values(line, &game->map_data.f_rgb) == FAILURE)
+			return (FAILURE);
+	}
+	else if (line[0] == 'C')
+	{
+		if (parse_color_values(line, &game->map_data.c_rgb) == FAILURE)
+			return (FAILURE);
+	}
+	else
+	{
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }
 
-//check whether F , C is found
-int process_color_line(char *line, t_game *game, int *floor_found, int *ceiling_found)
+int	process_color_line(char *line, t_game *game, int *floor_found,
+		int *ceiling_found)
 {
-    if (!line || strlen(line) == 0) // Skip empty or null lines
-    {
-        printf("Debug: Skipping empty or null line\n");
-        return (SUCCESS);
-    }
-
-    // Trim leading whitespace
-    while (*line == ' ' || *line == '\t')
-        line++;
-
-    printf("Debug: Processing line: %s\n", line);
-    printf("Debug: Current flags - floor_found: %d, ceiling_found: %d\n", *floor_found, *ceiling_found);
-
-    // Check if the line starts strictly with 'F' or 'C' followed by a space
-    if ((line[0] == 'F' || line[0] == 'C') && (line[1] == ' ' || line[1] == '\t'))
-    {
-        // Check for duplicates BEFORE processing
-        if (line[0] == 'F' && *floor_found)
-        {
-            printf("Debug: Duplicate floor color found! Line: %s\n", line);
-            return (FAILURE);
-        }
-        if (line[0] == 'C' && *ceiling_found)
-        {
-            printf("Debug: Duplicate ceiling color found! Line: %s\n", line);
-            return (FAILURE);
-        }
-
-        // Process the map line
-        if (process_map_line(line, game) == FAILURE)
-        {
-            printf("Debug: Failed to process map line: %s\n", line);
-            return (FAILURE);
-        }
-
-        // Update flags AFTER processing the line
-        if (line[0] == 'F')
-        {
-            *floor_found = 1;
-            printf("Debug: Setting floor_found to 1\n");
-        }
-        else if (line[0] == 'C')
-        {
-            *ceiling_found = 1;
-            printf("Debug: Setting ceiling_found to 1\n");
-        }
-    }
-    else
-    {
-        // If the line starts with 'Floor' or 'Ceiling' or any invalid keyword
-        if (strncmp(line, "Floor", 5) == 0 || strncmp(line, "Ceiling", 7) == 0)
-        {
-            printf("Debug: Invalid color keyword detected: %s\n", line);
-            return (FAILURE);
-        }
-
-        printf("Debug: Line does not specify 'F' or 'C', skipping: %s\n", line);
-        return (SUCCESS); // Non-color lines are ignored as they may represent textures.
-    }
-
-    printf("Debug: Final flags - floor_found: %d, ceiling_found: %d\n", *floor_found, *ceiling_found);
-    return (SUCCESS);
+	if (!line || ft_strlen(line) == 0)
+		return (SUCCESS);
+	while (*line == ' ' || *line == '\t')
+		line++;
+	if ((line[0] == 'F' || line[0] == 'C')
+		&& (line[1] == ' ' || line[1] == '\t'))
+	{
+		if (check_color_line(line, floor_found, ceiling_found) == FAILURE)
+			return (FAILURE);
+		if (process_map_line(line, game) == FAILURE)
+			return (FAILURE);
+		if (line[0] == 'F')
+			*floor_found = 1;
+		else if (line[0] == 'C')
+			*ceiling_found = 1;
+	}
+	else
+		return (SUCCESS);
+	return (SUCCESS);
 }
-
-
-
-
-
 
 // parse map file and extract C and F color
 // 1. call handle_color_line to read current line

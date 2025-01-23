@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 05:55:56 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 18:29:06 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 19:35:58 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,16 @@ void	free_array(char **arr)
 		i++;
 	}
 	free(arr);
+}
+
+int	open_file(char *file_path)
+{
+	int	fd;
+
+	if (!file_path)
+		return (-1);
+	fd = open(file_path, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	return (fd);
 }

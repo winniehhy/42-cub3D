@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:01:05 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 17:22:25 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 19:37:10 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,25 @@ int	check_direction(char *tmp, t_game *game, bool *found)
 	if (ft_strncmp(tmp, "NO", 2) == 0)
 	{
 		if (found[NORTH])
-			return (FALSE); // Duplicate detected
+			return (FALSE);
 		found[NORTH] = process_direction(tmp, game, NORTH);
 	}
 	else if (ft_strncmp(tmp, "SO", 2) == 0)
 	{
 		if (found[SOUTH])
-			return (FALSE); // Duplicate detected
+			return (FALSE);
 		found[SOUTH] = process_direction(tmp, game, SOUTH);
 	}
 	else if (ft_strncmp(tmp, "WE", 2) == 0)
 	{
 		if (found[WEST])
-			return (FALSE); // Duplicate detected
+			return (FALSE);
 		found[WEST] = process_direction(tmp, game, WEST);
 	}
 	else if (ft_strncmp(tmp, "EA", 2) == 0)
 	{
 		if (found[EAST])
-			return (FALSE); // Duplicate detected
+			return (FALSE);
 		found[EAST] = process_direction(tmp, game, EAST);
 	}
 	return (TRUE);
@@ -111,11 +111,7 @@ int	parse_directions(t_game *game, char *file_path)
 	char	*tmp;
 	bool	found[4];
 
-	if (!game || !file_path)
-		return (FALSE);
-	fd = open(file_path, O_RDONLY);
-	if (fd < 0)
-		return (FALSE);
+	fd = open_file(file_path);
 	ft_memset(found, 0, sizeof(found));
 	line = get_next_line(fd);
 	while (line != NULL)
@@ -127,7 +123,7 @@ int	parse_directions(t_game *game, char *file_path)
 		{
 			free(line);
 			close(fd);
-			return (FALSE); // Duplicate detected
+			return (FALSE);
 		}
 		free(line);
 		line = get_next_line(fd);
@@ -135,7 +131,6 @@ int	parse_directions(t_game *game, char *file_path)
 	close(fd);
 	return (found[NORTH] && found[SOUTH] && found[WEST] && found[EAST]);
 }
-
 
 // 1. check if is null == false
 // 2. loop thru 4 wall
