@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/23 10:26:14 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 11:57:42 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ void			init_game(t_game *game, char *map_file);
 char			**get_map(const char *file);
 void			init_mlx(t_game *game);
 int				load_texture(t_game *game, t_img *tex, char *path);
+int				close_window(t_game *game);
 
 //init_2.c
 int				init_texture(t_game *game);
@@ -170,7 +171,7 @@ void			setup_hooks(t_game *game);
 //texture.c
 unsigned int	get_pixel_color(t_img *tex, int x, int y);
 void			put_wall_texture(t_game *game, int screen_x, int screen_y,
-								int line_height);
+		int line_height);
 
 //render.c
 void			three_d_projection(t_game *game, float ray_x, float ray_y,

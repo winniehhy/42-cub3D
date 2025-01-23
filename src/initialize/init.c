@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:55:12 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 11:28:41 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 11:49:06 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,11 @@ void	init_all(t_game *game, char *map_file, char *texture_file)
 	game->map_data.width = 0;
 	game->map_data.height = 0;
 	mlx_mouse_hide(game->mlx, game->win);
+}
+
+int	close_window(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
+	return (0);
 }
