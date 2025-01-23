@@ -2,6 +2,6 @@
 	"files.associations": {
 		"cub3d.h": "c",
 		"mlx.h": "c",
-		"get_next_line_bonus.h": "c"
+		"string.h": "c"
 	}
 }

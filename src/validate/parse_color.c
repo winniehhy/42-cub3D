@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:29:52 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 09:47:18 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 15:12:46 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,59 @@ int	process_map_line(char *line, t_game *game)
 }
 
 //check whether F , C is found
-int	process_color_line(char *line, t_game *game,
-	int *floor_found, int *ceiling_found)
+int process_color_line(char *line, t_game *game, int *floor_found, int *ceiling_found)
 {
-	if (*line)
-	{
-		if (line[0] == 'F' || line[0] == 'C')
-		{
-			if (process_map_line(line, game) == FAILURE)
-				return (FAILURE);
-			if (line[0] == 'F')
-				*floor_found = 1;
-			else
-				*ceiling_found = 1;
-		}
-	}
-	return (SUCCESS);
+    if (!line || strlen(line) == 0) // Skip empty or null lines
+        return (SUCCESS);
+
+    // Trim leading whitespace
+    while (*line == ' ' || *line == '\t')
+        line++;
+
+    // Handle floor (F) and ceiling (C) lines
+    if (line[0] == 'F' || line[0] == 'C')
+    {
+        printf("Debug: Processing color line: %s\n", line);
+
+        // Check for duplicates BEFORE processing
+        if (line[0] == 'F' && *floor_found)
+        {
+            printf("Debug: Duplicate floor color found! Line: %s\n", line);
+            return (FAILURE); // Stop processing on duplicate floor
+        }
+        if (line[0] == 'C' && *ceiling_found)
+        {
+            printf("Debug: Duplicate ceiling color found! Line: %s\n", line);
+            return (FAILURE); // Stop processing on duplicate ceiling
+        }
+
+        // Process the map line
+        if (process_map_line(line, game) == FAILURE)
+        {
+            printf("Debug: Failed to process map line: %s\n", line);
+            return (FAILURE);
+        }
+
+        // Update the flags after successful processing
+        if (line[0] == 'F')
+        {
+            *floor_found = 1;
+            printf("Debug: Floor color found and processed\n");
+        }
+        else if (line[0] == 'C')
+        {
+            *ceiling_found = 1;
+            printf("Debug: Ceiling color found and processed\n");
+        }
+    }
+    else
+    {
+        printf("Debug: Skipping non-color line: %s\n", line);
+    }
+
+    return (SUCCESS);
 }
+
 
 // parse map file and extract C and F color
 // 1. call handle_color_line to read current line
