@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:29:52 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 17:21:51 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 18:33:35 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,11 +151,6 @@ int process_color_line(char *line, t_game *game, int *floor_found, int *ceiling_
     printf("Debug: Final flags - floor_found: %d, ceiling_found: %d\n", *floor_found, *ceiling_found);
     return (SUCCESS);
 }
-
-
-
-
-
 
 // parse map file and extract C and F color
 // 1. call handle_color_line to read current line

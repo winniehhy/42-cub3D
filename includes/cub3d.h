@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/23 17:23:24 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 19:17:12 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <ctype.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <X11/X.h>
@@ -296,5 +297,9 @@ void			rotate_right(t_game *game);
 
 //check.c
 bool validate_map_position(const char *file_path);
+bool validate_map_section(FILE *file);
+char *trim_leading_spaces(char *line);
+int	check_row_validity(char **map, int row);
+int	check_space_around(char **map, int row, int len, int height);
 
 #endif
