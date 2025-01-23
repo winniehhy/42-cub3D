@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/23 19:17:12 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 19:43:22 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@ int				init_texture(t_game *game);
 //utils.c
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void			setup_hooks(t_game *game);
+int 			open_file(char *file_path);
+
 
 //texture.c
 unsigned int	get_pixel_color(t_img *tex, int x, int y);
@@ -280,6 +282,8 @@ int				handle_color_line(char *line, t_game *game,
 					int *floor_found, int *ceiling_found);
 int				validate_colors(t_game *game, int floor_found,
 					int ceiling_found);
+int				check_color_line(char *line, int *floor_found, int *ceiling_found);
+
 
 //main.c
 void			init_all(t_game *game, char *map_file, char *texture_file);
@@ -302,4 +306,6 @@ char *trim_leading_spaces(char *line);
 int	check_row_validity(char **map, int row);
 int	check_space_around(char **map, int row, int len, int height);
 
+//check2.c
+bool	check_single_direction(t_game *game, char *tmp, bool *found);
 #endif

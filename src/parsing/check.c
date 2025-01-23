@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:14:52 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 19:17:57 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 19:20:45 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*trim_leading_spaces(char *line)
 {
-	while (isspace(*line))
+	while (ft_isspace(*line))
 		line++;
 	return (line);
 }

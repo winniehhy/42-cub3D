@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 18:05:37 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 18:33:17 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 19:42:16 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,16 @@ int	validate_colors(t_game *game, int floor_found, int ceiling_found)
 		return (FAILURE);
 	}
 	check_rgb_colors(&game->map_data);
+	return (SUCCESS);
+}
+
+int	check_color_line(char *line, int *floor_found, int *ceiling_found)
+{
+	if (line[0] == 'F' && *floor_found)
+		return (FAILURE);
+	if (line[0] == 'C' && *ceiling_found)
+		return (FAILURE);
+	if (line[0] != 'F' && line[0] != 'C')
+		return (FAILURE);
 	return (SUCCESS);
 }
