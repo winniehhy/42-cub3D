@@ -3,54 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 14:09:46 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/16 12:33:11 by hheng            ###   ########.fr       */
+/*   Created: 2025/01/23 10:40:17 by hheng             #+#    #+#             */
+/*   Updated: 2025/01/23 10:48:31 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-    char *buffer;
-    char *line;
-    static char *left_over[1024];
+	char		*buffer;
+	char		*line;
+	static char	*left_over[1024];
 
-    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-    {
-        return (NULL);
-    }
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
+	fill_buffer(fd, buffer, &left_over[fd]);
+	free(buffer);
+	if (!left_over[fd] || left_over[fd][0] == '\0')
+		return (cleanup_and_return(&left_over[fd]));
+	line = set_line(&left_over[fd]);
+	if (!line)
+		return (cleanup_and_return(&left_over[fd]));
+	return (line);
+}
 
-    buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-    if (!buffer)
-    {
-        return (NULL);
-    }
-
-    fill_buffer(fd, buffer, &left_over[fd]);
-    free(buffer);
-
-    if (!left_over[fd] || left_over[fd][0] == '\0')
-    {
-        free(left_over[fd]);
-        left_over[fd] = NULL;
-        return (NULL);
-    }
-
-    line = set_line(&left_over[fd]);
-    if (!line)
-    {
-        if (left_over[fd])
-        {
-            free(left_over[fd]);
-            left_over[fd] = NULL;
-        }
-        return (NULL);
-    }
-
-    return (line);
+static	char	*cleanup_and_return(char **left_over)
+{
+	if (*left_over)
+	{
+		free(*left_over);
+		*left_over = NULL;
+	}
+	return (NULL);
 }
 
 char	*copy_line(char *left_over)
@@ -63,10 +53,7 @@ char	*copy_line(char *left_over)
 		return (NULL);
 	line = malloc((line_len(left_over) + 1) * sizeof(char));
 	if (!line)
-	{
-		free(line);
 		return (NULL);
-	}
 	while ((left_over)[i] != '\n' && (left_over)[i])
 	{
 		line[i] = (left_over)[i];
@@ -80,21 +67,21 @@ char	*copy_line(char *left_over)
 
 char	*set_line(char **left_over)
 {
-    char	*line;
-    char	*temp;
+	char	*line;
+	char	*temp;
 
-    if (!*left_over)
-        return (NULL);
-    temp = *left_over;
-    line = copy_line(*left_over);
-    *left_over = ft_strdup_gnl(*left_over + line_len(*left_over));
-    if (!*left_over || !**left_over)
-    {
-        free(*left_over);
-        *left_over = NULL;
-    }
-    free(temp);
-    return (line);
+	if (!*left_over)
+		return (NULL);
+	temp = *left_over;
+	line = copy_line(*left_over);
+	*left_over = ft_strdup_gnl(*left_over + line_len(*left_over));
+	if (!*left_over || !**left_over)
+	{
+		free(*left_over);
+		*left_over = NULL;
+	}
+	free(temp);
+	return (line);
 }
 
 void	fill_buffer(int fd, char *buffer, char **left_over)
