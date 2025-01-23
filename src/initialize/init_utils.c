@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:31:14 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 19:14:13 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 09:17:02 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,51 +67,33 @@ void    init_mlx(t_game *game)
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 
-/***
- * @brief Load the texture from the .xpm file to an image
- * @param game the game structure
- * @param img the image to store the loaded texture
- * @param filename the filename of the .xpm texture
- */
+// load texture from file then store to t_img
+// 1. clean existing texture
+// 2. load XPM image file 
+// 3. retrieve texture data, (image info)
+// 4. extract and store respectively
 int load_texture(t_game *game, t_img *tex, char *path)
 {
-    printf("Debug: Loading texture from: %s\n", path);
-    
-    // Clean up existing texture if present
-    if (tex->img != NULL)
-    {
-        mlx_destroy_image(game->mlx, tex->img);
-        tex->img = NULL;
-        tex->addr = NULL;
-    }
+    int bits_per_pixel, line_length, endian;
 
-    // Load the texture
+    if (tex->img)
+        mlx_destroy_image(game->mlx, tex->img);
+
     tex->img = mlx_xpm_file_to_image(game->mlx, path, &tex->width, &tex->height);
     if (!tex->img)
-    {
-        printf("Error: mlx_xpm_file_to_image failed for %s\n", path);
         return (FALSE);
-    }
 
-    // Get the texture data
-    int bits_per_pixel;
-    int line_length;
-    int endian;
     tex->addr = mlx_get_data_addr(tex->img, &bits_per_pixel, &line_length, &endian);
     if (!tex->addr)
     {
-        printf("Error: mlx_get_data_addr failed\n");
         mlx_destroy_image(game->mlx, tex->img);
         tex->img = NULL;
         return (FALSE);
     }
 
-    // Store the texture information
     tex->bits_per_pixel = bits_per_pixel;
     tex->line_length = line_length;
     tex->endian = endian;
-
-    printf("Debug: Texture loaded - width: %d, height: %d\n", tex->width, tex->height);
     return (TRUE);
 }
 

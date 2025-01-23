@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:01:05 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/22 20:05:28 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 09:20:00 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,11 @@ int	validate_xpm_format(char *path)
 	return (TRUE);
 }
 
-/**
- * process_direction - Processes and loads a texture for a specific direction.
- * @line: The line containing the texture path.
- * @game: Pointer to the game structure.
- * @direction: The direction (NORTH, SOUTH, WEST, EAST) being processed.
- * 
- * Extracts the texture path from the line, removes any trailing newline,
- * and attempts to load the texture for the specified direction.
- * 
- * Return: TRUE if successful, FALSE otherwise.
- */
+// 1. skip first two character
+// 2. skip white sapce
+// 3. dup (texture line) to path 
+// 4. search for newline , then replace to null to remove 
+// 5. call load_texture then free
 int	process_direction(char *line, t_game *game, int direction)
 {
 	char	*path;
@@ -94,16 +88,9 @@ int	check_direction(char *tmp, t_game *game, bool *found)
 	return (1);
 }
 
-/**
- * parse_directions - Parses a map file to load textures for all directions.
- * @game: Pointer to the game structure.
- * @file_path: The path to the map file.
- * 
- * Reads the map file line by line and extracts texture paths for the
- * NORTH, SOUTH, WEST, and EAST directions. Ensures all directions are found.
- * 
- * Return: TRUE if all directions are successfully loaded, FALSE otherwise.
- */
+// read file and check for the presence of NO,SO, EA, WE
+// set temp to point to the current line
+// read and check direction
 int	parse_directions(t_game *game, char *file_path)
 {
 	int		fd;
@@ -131,15 +118,10 @@ int	parse_directions(t_game *game, char *file_path)
 	return (found[NORTH] && found[SOUTH] && found[WEST] && found[EAST]);
 }
 
-/**
- * validate_loaded_textures - Validates the loaded textures for correctness.
- * @game: Pointer to the game structure.
- * 
- * Checks that all textures are properly loaded, have valid dimensions,
- * and contain non-null image and address data.
- * 
- * Return: TRUE if all textures are valid, FALSE otherwise.
- */
+// 1. check if is null == false
+// 2. loop thru 4 wall
+// 3. if null == false
+// 4. if width/ height <= 0 = invalid
 int	validate_loaded_textures(t_game *game)
 {
 	int		i;

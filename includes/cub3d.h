@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 19:16:33 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 10:26:14 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,6 @@ int				count_players(t_game *game, int map_start);
 void			set_player_position(t_game *game, int i, int j, int map_start);
 
 //map_check_utils.c
-char			**copy_map(char **original_map, int height);
 void			free_map(char **map);
 void			print_err_msg(char *msg);
 int				is_valid_map_char(char c);

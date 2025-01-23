@@ -34,6 +34,8 @@ int	check_first_last_row(char **map, int height)
 	return (SUCCESS);
 }
 
+// 1. if first = -1 & !\n, , first = len ( start)
+// 2. if current character not space, update len=last
 int	check_row_edges(char **map, int row, int height)
 {
 	int	len;
@@ -67,6 +69,9 @@ int	check_config_identifier(char *line, int i)
 	return (0);
 }
 
+// 1. while - iterate each row up to height
+// 2. while [i][j] - iteract each character in each row
+// 3. if found player char
 int	count_players(t_game *game, int map_start)
 {
 	int	i;
@@ -93,6 +98,7 @@ int	count_players(t_game *game, int map_start)
 	return (player_count);
 }
 
+// divide half ( left, right)
 void	set_player_position(t_game *game, int i, int j, int map_start)
 {
 	game->player.pos_x = (double)j + 0.5;

@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:23:02 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/22 20:24:01 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 09:21:49 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	check_rgb_colors(t_map_data *map_data)
 	return (TRUE);
 }
 
+//once memory allocate successfully, open (file path) in read-only mode
 int	open_file_and_allocate_map(char *file_path, t_game *game)
 {
 	game->temp_map = malloc(sizeof(char *) * (game->temp_rows + 1));
@@ -54,6 +55,7 @@ int	open_file_and_allocate_map(char *file_path, t_game *game)
 	return (open(file_path, O_RDONLY));
 }
 
+//duplicate the string(line) then store in temp_map[i]
 int	process_line(char *line, t_game *game, int i)
 {
 	game->temp_map[i] = ft_strdup(line);

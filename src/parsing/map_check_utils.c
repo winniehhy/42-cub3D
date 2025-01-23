@@ -12,29 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-char	**copy_map(char **original_map, int height)
-{
-	char	**new_map;
-	int		i;
-
-	new_map = (char **)malloc(sizeof(char *) * (height + 1));
-	if (!new_map)
-		return (NULL);
-	i = 0;
-	while (i < height)
-	{
-		new_map[i] = ft_strdup(original_map[i]);
-		if (!new_map[i])
-		{
-			free_map(new_map);
-			return (NULL);
-		}
-		i++;
-	}
-	new_map[height] = NULL;
-	return (new_map);
-}
-
 void	free_map(char **map)
 {
 	int	i;
