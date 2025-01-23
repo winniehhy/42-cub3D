@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/23 14:31:37 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 16:15:33 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,5 +294,8 @@ void			move_right(t_game *game);
 //rotate.c
 void			rotate_left(t_game *game);
 void			rotate_right(t_game *game);
+
+//check.c
+bool validate_map_position(const char *file_path);
 
 #endif

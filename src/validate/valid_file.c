@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:38:20 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 11:22:13 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 16:19:58 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	go_to_check_file(char *file_path, t_game *game)
 		return (print_err_msg("Invalid argument"), FAILURE);
 	if (!valid_input(2, file_path))
 		return (print_err_msg("Invalid input"), FAILURE);
+	if (!validate_map_position(file_path))
+        return (print_err_msg("Invalid map position"), FAILURE);
 	if (!valid_file(file_path, game))
 		return (print_err_msg("Invalid file"), FAILURE);
 	if (!valid_texture(game, file_path))
