@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 05:59:45 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 09:27:47 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 11:24:09 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	parse_temp_map(t_game *game)
 	map_start = find_map_start(game->temp_map, game->temp_rows);
 	if (map_start == -1)
 		return (FAILURE);
+	if (allocate_final_map(game) == FAILURE)
+		return (FAILURE);
 	if (get_map_dimensions(game, map_start) == FAILURE)
 		return (FAILURE);
 	if (copy_map_from_temp(game, map_start) == FAILURE)
@@ -78,8 +80,6 @@ int	parse_temp_map(t_game *game)
 		free_map_data(game);
 		return (FAILURE);
 	}
-	if (allocate_final_map(game) == FAILURE)
-		return (FAILURE);
 	free_temp_map(game);
 	return (SUCCESS);
 }
