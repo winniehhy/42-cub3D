@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:01:05 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 09:20:00 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 17:22:25 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,33 @@ int	process_direction(char *line, t_game *game, int direction)
  */
 int	check_direction(char *tmp, t_game *game, bool *found)
 {
-	if (ft_strncmp(tmp, "NO", 2) == 0 && !found[NORTH])
+	if (ft_strncmp(tmp, "NO", 2) == 0)
+	{
+		if (found[NORTH])
+			return (FALSE); // Duplicate detected
 		found[NORTH] = process_direction(tmp, game, NORTH);
-	else if (ft_strncmp(tmp, "SO", 2) == 0 && !found[SOUTH])
+	}
+	else if (ft_strncmp(tmp, "SO", 2) == 0)
+	{
+		if (found[SOUTH])
+			return (FALSE); // Duplicate detected
 		found[SOUTH] = process_direction(tmp, game, SOUTH);
-	else if (ft_strncmp(tmp, "WE", 2) == 0 && !found[WEST])
+	}
+	else if (ft_strncmp(tmp, "WE", 2) == 0)
+	{
+		if (found[WEST])
+			return (FALSE); // Duplicate detected
 		found[WEST] = process_direction(tmp, game, WEST);
-	else if (ft_strncmp(tmp, "EA", 2) == 0 && !found[EAST])
+	}
+	else if (ft_strncmp(tmp, "EA", 2) == 0)
+	{
+		if (found[EAST])
+			return (FALSE); // Duplicate detected
 		found[EAST] = process_direction(tmp, game, EAST);
-	return (1);
+	}
+	return (TRUE);
 }
 
-// read file and check for the presence of NO,SO, EA, WE
-// set temp to point to the current line
-// read and check direction
 int	parse_directions(t_game *game, char *file_path)
 {
 	int		fd;
@@ -110,13 +123,19 @@ int	parse_directions(t_game *game, char *file_path)
 		tmp = line;
 		while (*tmp == ' ' || *tmp == '\t')
 			tmp++;
-		check_direction(tmp, game, found);
+		if (!check_direction(tmp, game, found))
+		{
+			free(line);
+			close(fd);
+			return (FALSE); // Duplicate detected
+		}
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
 	return (found[NORTH] && found[SOUTH] && found[WEST] && found[EAST]);
 }
+
 
 // 1. check if is null == false
 // 2. loop thru 4 wall
