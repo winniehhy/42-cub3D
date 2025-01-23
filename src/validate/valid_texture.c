@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:01:05 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 09:20:00 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 12:33:46 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,31 +91,71 @@ int	check_direction(char *tmp, t_game *game, bool *found)
 // read file and check for the presence of NO,SO, EA, WE
 // set temp to point to the current line
 // read and check direction
-int	parse_directions(t_game *game, char *file_path)
+int parse_directions(t_game *game, char *file_path)
 {
-	int		fd;
-	char	*line;
-	char	*tmp;
-	bool	found[4];
+    int fd;
+    char *line;
+    char *tmp;
+    bool found[4] = {0};
+    t_file_elements elements = {0};
 
-	if (!game || !file_path)
-		return (FALSE);
-	fd = open(file_path, O_RDONLY);
-	if (fd < 0)
-		return (FALSE);
-	ft_memset(found, 0, sizeof(found));
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		tmp = line;
-		while (*tmp == ' ' || *tmp == '\t')
-			tmp++;
-		check_direction(tmp, game, found);
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (found[NORTH] && found[SOUTH] && found[WEST] && found[EAST]);
+    if (!game || !file_path)
+        return (FALSE);
+
+    fd = open(file_path, O_RDONLY);
+    if (fd < 0)
+        return (FALSE);
+
+    line = get_next_line(fd);
+    while (line != NULL)
+    {
+        tmp = line;
+        while (*tmp == ' ' || *tmp == '\t')
+            tmp++;
+
+        // Track duplicates
+        if (ft_strncmp(tmp, "NO", 2) == 0)
+        {
+            elements.no_count++;
+            elements.no_path = ft_strdup(tmp + 2);
+        }
+        else if (ft_strncmp(tmp, "SO", 2) == 0)
+        {
+            elements.so_count++;
+            elements.so_path = ft_strdup(tmp + 2);
+        }
+        else if (ft_strncmp(tmp, "WE", 2) == 0)
+        {
+            elements.we_count++;
+            elements.we_path = ft_strdup(tmp + 2);
+        }
+        else if (ft_strncmp(tmp, "EA", 2) == 0)
+        {
+            elements.ea_count++;
+            elements.ea_path = ft_strdup(tmp + 2);
+        }
+        else if (ft_strncmp(tmp, "F ", 2) == 0)
+            elements.floor_count++;
+        else if (ft_strncmp(tmp, "C ", 2) == 0)
+            elements.ceiling_count++;
+
+        // Original direction checking
+        check_direction(tmp, game, found);
+        
+        free(line);
+        line = get_next_line(fd);
+    }
+    close(fd);
+
+    // Check for duplicates before final validation
+    if (!validate_unique_elements(&elements))
+    {
+        free_file_elements(&elements);
+        return (FALSE);
+    }
+
+    free_file_elements(&elements);
+    return (found[NORTH] && found[SOUTH] && found[WEST] && found[EAST]);
 }
 
 // 1. check if is null == false

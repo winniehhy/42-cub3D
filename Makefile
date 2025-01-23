@@ -40,6 +40,7 @@ SRC_FILES = main.c \
 			$(VALDIR)valid_texture.c\
 			$(VALDIR)parse_color.c\
 			$(VALDIR)color_utils.c\
+			$(VALDIR)check.c\
 			$(PARDIR)main_map_check.c\
 			$(PARDIR)map_check_utils.c\
 			$(PARDIR)map_check.c\

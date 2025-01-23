@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/23 11:57:42 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 12:34:48 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,20 @@ typedef struct s_game
 	int			temp_rows;
 	char		**temp_map;
 }	t_game;
+
+typedef struct s_file_elements 
+{
+    int no_count;
+    int so_count;
+    int we_count;
+    int ea_count;
+    int floor_count;
+    int ceiling_count;
+    char *no_path;
+    char *so_path;
+    char *we_path;
+    char *ea_path;
+} t_file_elements;
 
 void			init_player(t_player *player);
 int				key_press(int keycode, t_game *game);
@@ -288,5 +302,9 @@ void			move_right(t_game *game);
 //rotate.c
 void			rotate_left(t_game *game);
 void			rotate_right(t_game *game);
+
+//check.c
+int validate_unique_elements(t_file_elements *elements);
+void free_file_elements(t_file_elements *elements);
 
 #endif
