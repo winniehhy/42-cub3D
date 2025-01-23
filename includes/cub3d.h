@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/23 11:57:42 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/23 14:31:37 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@
 # define PI 3.14159265359
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
+# define NUM_DIRECTIONS 6
+# define FLOOR 4
+# define CEILING 5
 
 enum e_direction
 {
@@ -133,6 +136,8 @@ typedef struct s_game
 	int			line_length;
 	int			map_height;
 	int			endian;
+	int			floor_color;
+    int 		ceiling_color;
 	t_player	player;
 	t_ray		ray;
 	t_map_data	map_data;
@@ -248,6 +253,7 @@ int				parse_directions(t_game *game, char *file_path);
 int				validate_rgb(size_t color);
 int				check_rgb_colors(t_map_data *map_data);
 int				validate_loaded_textures(t_game *game);
+int				check_direction(char *tmp, t_game *game, bool *found);
 
 //valid_file_mem.c
 int				get_map_dimensions(t_game *game, int map_start);
