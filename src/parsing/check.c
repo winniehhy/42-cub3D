@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:14:52 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/24 12:26:28 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/24 13:28:30 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,50 +21,52 @@ char	*trim_leading_spaces(char *line)
 
 //make sure map is the last section in the file
 //is_map_line, make sure map_first not happen
-bool validate_map_section(int fd)
+bool	validate_map_section(int fd)
 {
-    char *line;
-    bool map_started = false;
+	char	*line;
+	bool	map_started;
+	char	*trimmed_line;
 
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        char *trimmed_line = trim_leading_spaces(line);
-        
-        if (*trimmed_line == '\0')
-        {
-            free(line);
-            continue;
-        }
-        
-        if (is_map_line(trimmed_line))
-            map_started = true;
-        else if (map_started)
-        {
-            print_err_msg("Error: Map must be the last section in the file.\n");
-            free(line);
-            return (false);
-        }
-        
-        free(line);
-    }
-    return (true);
+	map_started = false;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		trimmed_line = trim_leading_spaces(line);
+		if (*trimmed_line == '\0')
+		{
+			free(line);
+			continue ;
+		}
+		if (is_map_line(trimmed_line))
+			map_started = true;
+		else if (map_started)
+		{
+			print_err_msg("Error: Map must be the last section in the file.\n");
+			free(line);
+			return (false);
+		}
+		free(line);
+	}
+	return (true);
 }
 
-bool validate_map_position(const char *file_path)
+bool	validate_map_position(const char *file_path)
 {
-    int fd = open(file_path, O_RDONLY);
-    if (fd == -1)
-    {
-        print_err_msg("Error opening file");
-        return (false);
-    }
-    
-    bool result = validate_map_section(fd);
-    
-    close(fd);
-    return (result);
+	int		fd;
+	bool	result;
+
+	fd = open(file_path, O_RDONLY);
+	if (fd == -1)
+	{
+		print_err_msg("Error opening file");
+		return (false);
+	}
+	result = validate_map_section(fd);
+	close(fd);
+	return (result);
 }
 
+//strict ensure that the first & last row are all walls
 int	check_row_validity(char **map, int row)
 {
 	int	first;
@@ -89,6 +91,8 @@ int	check_row_validity(char **map, int row)
 	return (SUCCESS);
 }
 
+//check if there is a space around the player
+// -1 = up, 1 = down, -1 = left, 1 = right
 int	check_space_around(char **map, int row, int len, int height)
 {
 	if (row > 0 && map[row - 1][len] == ' ')

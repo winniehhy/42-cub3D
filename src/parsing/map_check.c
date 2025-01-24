@@ -31,6 +31,8 @@ int	check_first_last_row(char **map, int height)
 			return (FAILURE);
 		i++;
 	}
+	if (check_extra_characters_after_last_row(map, height) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }
 

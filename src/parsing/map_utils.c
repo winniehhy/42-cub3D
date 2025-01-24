@@ -6,14 +6,14 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 23:56:34 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 17:27:59 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/24 12:57:42 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// N : X = 0, Y = -1 ( facing upward)
-// S : X = 0, Y = 1 ( facing downward)
+// N : X = 0, Y = -1 ( facing upward) - getting smaller
+// S : X = 0, Y = 1 ( facing downward) - getting bigger
 void	player_north_south(t_game *game, int i, int j)
 {
 	if (game->map_data.map[i][j] == 'N')

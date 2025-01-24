@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 21:29:38 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 19:10:27 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/24 13:23:30 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	map_checking(t_game *game)
 		return (print_err_msg("Map must have exactly one player"), FAILURE);
 	if (!validate_map_chars(game))
 		return (print_err_msg("Map contains invalid characters"), FAILURE);
-	convert_spaces_to_walls(game);
 	return (SUCCESS);
 }
 

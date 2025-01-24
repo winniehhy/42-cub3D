@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/24 12:13:18 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/24 13:14:54 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,10 +231,7 @@ void			player_north_south(t_game *game, int i, int j);
 void			player_east_west(t_game *game, int i, int j);
 
 //map_wall.c
-int				check_surrounding_walls(char **map, int row, int col);
-int				is_surrounded_by_walls(char **map, int row, int col,
-					int height);
-int				is_position_valid(char **map, int row, int col, int height);
+int				check_extra_characters_after_last_row(char **map, int height);
 void			convert_spaces_to_walls(t_game *game);
 int				check_map_chars_row(char **map, int row);
 
