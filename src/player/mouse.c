@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:40:59 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 14:03:01 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/24 14:41:49 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	toggle_mouse(t_game *game)
 	}
 }
 
+//only track x-axis
 int	mouse_pov(int x, int y, t_game *game)
 {
 	static int	old_x;
