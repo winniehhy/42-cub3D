@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/23 20:03:44 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/24 12:13:18 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +300,7 @@ void			rotate_right(t_game *game);
 
 //check.c
 bool			validate_map_position(const char *file_path);
-bool			validate_map_section(FILE *file);
+bool			validate_map_section(int fd);
 char			*trim_leading_spaces(char *line);
 int				check_row_validity(char **map, int row);
 int				check_space_around(char **map, int row, int len, int height);

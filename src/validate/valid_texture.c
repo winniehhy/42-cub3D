@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:01:05 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 19:37:10 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/24 12:32:02 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	check_direction(char *tmp, t_game *game, bool *found)
 	return (TRUE);
 }
 
+//read file and check whether contains direction
 int	parse_directions(t_game *game, char *file_path)
 {
 	int		fd;

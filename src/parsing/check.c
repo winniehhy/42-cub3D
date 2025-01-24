@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:14:52 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/23 19:20:45 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/24 12:26:28 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,43 +19,50 @@ char	*trim_leading_spaces(char *line)
 	return (line);
 }
 
-bool	validate_map_section(FILE *file)
+//make sure map is the last section in the file
+//is_map_line, make sure map_first not happen
+bool validate_map_section(int fd)
 {
-	char	line[1024];
-	bool	map_started;
-	char	*trimmed_line;
+    char *line;
+    bool map_started = false;
 
-	map_started = false;
-	while (fgets(line, sizeof(line), file))
-	{
-		trimmed_line = trim_leading_spaces(line);
-		if (*trimmed_line == '\0')
-			continue ;
-		if (is_map_line(trimmed_line))
-			map_started = true;
-		else if (map_started)
-		{
-			print_err_msg("Error: Map must be the last section in the file.\n");
-			return (false);
-		}
-	}
-	return (true);
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        char *trimmed_line = trim_leading_spaces(line);
+        
+        if (*trimmed_line == '\0')
+        {
+            free(line);
+            continue;
+        }
+        
+        if (is_map_line(trimmed_line))
+            map_started = true;
+        else if (map_started)
+        {
+            print_err_msg("Error: Map must be the last section in the file.\n");
+            free(line);
+            return (false);
+        }
+        
+        free(line);
+    }
+    return (true);
 }
 
-bool	validate_map_position(const char *file_path)
+bool validate_map_position(const char *file_path)
 {
-	FILE	*file;
-	bool	result;
-
-	file = fopen(file_path, "r");
-	if (!file)
-	{
-		print_err_msg("Error opening file");
-		return (false);
-	}
-	result = validate_map_section(file);
-	fclose(file);
-	return (result);
+    int fd = open(file_path, O_RDONLY);
+    if (fd == -1)
+    {
+        print_err_msg("Error opening file");
+        return (false);
+    }
+    
+    bool result = validate_map_section(fd);
+    
+    close(fd);
+    return (result);
 }
 
 int	check_row_validity(char **map, int row)
