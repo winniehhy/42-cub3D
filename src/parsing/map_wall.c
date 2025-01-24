@@ -12,25 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-void	convert_spaces_to_walls(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < game->map_data.height)
-	{
-		j = 0;
-		while (game->map_data.map[i][j])
-		{
-			if (game->map_data.map[i][j] == ' ')
-				game->map_data.map[i][j] = '1';
-			j++;
-		}
-		i++;
-	}
-}
-
 int	check_map_chars_row(char **map, int row)
 {
 	int	j;
@@ -46,22 +27,19 @@ int	check_map_chars_row(char **map, int row)
 	return (SUCCESS);
 }
 
-int	check_extra_characters_after_last_row(char **map, int height)
+bool	check_map_section(char *line, bool *map_started)
 {
-	int	i;
-	int	j;
+	char	*trimmed_line;
 
-	i = height - 1;
-	while (map[i] != NULL)
+	trimmed_line = trim_leading_spaces(line);
+	if (*trimmed_line == '\0')
+		return (true);
+	if (is_map_line(trimmed_line))
+		*map_started = true;
+	else if (*map_started)
 	{
-		j = 0;
-		while (map[i][j] != '\0')
-		{
-			if (map[i][j] != '1' && map[i][j] != '0')
-				return (FAILURE);
-			j++;
-		}
-		i++;
+		print_err_msg("Map must be last section.\n");
+		return (false);
 	}
-	return (SUCCESS);
+	return (true);
 }

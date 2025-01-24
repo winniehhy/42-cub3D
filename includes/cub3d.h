@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/24 13:14:54 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/24 14:17:36 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,8 +231,7 @@ void			player_north_south(t_game *game, int i, int j);
 void			player_east_west(t_game *game, int i, int j);
 
 //map_wall.c
-int				check_extra_characters_after_last_row(char **map, int height);
-void			convert_spaces_to_walls(t_game *game);
+bool			check_map_section(char *line, bool *map_started);
 int				check_map_chars_row(char **map, int row);
 
 /*Validate*/

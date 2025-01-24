@@ -6,7 +6,7 @@
 /*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:14:52 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/24 13:28:30 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/24 14:16:34 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,18 @@ bool	validate_map_section(int fd)
 {
 	char	*line;
 	bool	map_started;
-	char	*trimmed_line;
 
 	map_started = false;
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line)
 	{
-		trimmed_line = trim_leading_spaces(line);
-		if (*trimmed_line == '\0')
+		if (!check_map_section(line, &map_started))
 		{
-			free(line);
-			continue ;
-		}
-		if (is_map_line(trimmed_line))
-			map_started = true;
-		else if (map_started)
-		{
-			print_err_msg("Error: Map must be the last section in the file.\n");
 			free(line);
 			return (false);
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
 	return (true);
 }
